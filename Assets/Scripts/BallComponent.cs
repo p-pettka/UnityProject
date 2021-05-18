@@ -5,7 +5,7 @@ using UnityEngine;
 public class BallComponent : MonoBehaviour
 {
     Rigidbody2D m_rigidbody;
-
+    public float PhysicsSpeed;
     private void OnMouseDrag()
     {
         if (GameplayManager.Instance.Pause) return;
@@ -18,7 +18,10 @@ public class BallComponent : MonoBehaviour
     {
         m_rigidbody.simulated = true;
     }
-
+    public bool IsSimulated()
+    {
+        return m_rigidbody.simulated;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +52,9 @@ public class BallComponent : MonoBehaviour
         }
 
         }
-
-
+    private void FixedUpdate()
+    {
+        PhysicsSpeed = m_rigidbody.velocity.magnitude;
     }
+
+}

@@ -12,20 +12,11 @@ public class CameraController : MonoBehaviour
         followTarget = FindObjectOfType<BallComponent>();
         originalPosition = transform.position;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    private void FixedUpdate()
-    {
-       
-    }
     private void LateUpdate()
     {
         if (!followTarget.IsSimulated()) return;
         transform.position = Vector3.MoveTowards(transform.position, originalPosition + followTarget.transform.position, followTarget.PhysicsSpeed);
+        if (Input.GetKeyUp(KeyCode.R)) transform.position = originalPosition;
         //transform.position = followTarget.transform.position + originalPosition;
 
     }

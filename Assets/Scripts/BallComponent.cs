@@ -9,6 +9,11 @@ public class BallComponent : MonoBehaviour
     private Rigidbody2D m_connectedBody;
     private Vector3 m_startPosition;
     private Quaternion m_startRotation;
+    private AudioSource m_audioSource;
+    public AudioClip PullSound;
+    public AudioClip ShootSound;
+    public AudioClip ImpactSound;
+    public AudioClip RestartSound;
     public float SlingStart = 0.5f;
     public float PhysicsSpeed;
     public float MaxSpringDistance = 2.5f;
@@ -16,6 +21,7 @@ public class BallComponent : MonoBehaviour
     private LineRenderer m_lineRender;
     private TrailRenderer m_trailRenderer;
     private bool m_hitTheGround = false;
+    private bool shooted = false;
     private void SetLineRenderPoints()
     {
         m_lineRender.positionCount = 3;
@@ -25,33 +31,44 @@ public class BallComponent : MonoBehaviour
     private void OnMouseDrag()
     {
         if (GameplayManager.Instance.Pause) return;
-        m_rigidbody.simulated = false;
-        m_hitTheGround = false;
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = new Vector3(worldPos.x, worldPos.y, 0);
-        Vector2 newBallPos = new Vector3(worldPos.x, worldPos.y);
-        float CurJointDistance = Vector3.Distance(newBallPos, m_connectedBody.transform.position);
-        if(CurJointDistance > MaxSpringDistance)
+        if (!shooted)
         {
-            Vector2 direction = (newBallPos - m_connectedBody.position).normalized;
-            transform.position = m_connectedBody.position + direction * MaxSpringDistance;
-        }else
-        {
-            transform.position = newBallPos;
+            m_rigidbody.simulated = false;
+            m_hitTheGround = false;
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = new Vector3(worldPos.x, worldPos.y, 0);
+            Vector2 newBallPos = new Vector3(worldPos.x, worldPos.y);
+            float CurJointDistance = Vector3.Distance(newBallPos, m_connectedBody.transform.position);
+            if (CurJointDistance > MaxSpringDistance)
+            {
+                Vector2 direction = (newBallPos - m_connectedBody.position).normalized;
+                transform.position = m_connectedBody.position + direction * MaxSpringDistance;
+            }
+            else
+            {
+                transform.position = newBallPos;
+            }
+            SetLineRenderPoints();
         }
-        SetLineRenderPoints();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             m_hitTheGround = true;
+            m_audioSource.PlayOneShot(ImpactSound);
         }
     }
     private void OnMouseUp()
     {
         m_rigidbody.simulated = true;
+        if(!shooted)m_audioSource.PlayOneShot(ShootSound);
     }
+    private void OnMouseDown()
+    {
+        if (!shooted)m_audioSource.PlayOneShot(PullSound);
+    }
+
     public bool IsSimulated()
     {
         return m_rigidbody.simulated;
@@ -64,6 +81,7 @@ public class BallComponent : MonoBehaviour
         m_connectedBody = m_connectedJoint.connectedBody;
         m_lineRender = GetComponent<LineRenderer>();
         m_trailRenderer = GetComponent<TrailRenderer>();
+        m_audioSource = GetComponent<AudioSource>();
         m_startPosition = transform.position;
         m_startRotation = transform.rotation;
     }
@@ -77,6 +95,7 @@ public class BallComponent : MonoBehaviour
             m_connectedJoint.enabled = false;
             m_lineRender.enabled = false;
             m_trailRenderer.enabled = true;
+            shooted = true;
         }
         if (transform.position.x < m_connectedBody.transform.position.x + SlingStart)
         {
@@ -122,7 +141,9 @@ public class BallComponent : MonoBehaviour
         m_lineRender.enabled = true;
         m_trailRenderer.enabled = false;
 
+        shooted = false;
         SetLineRenderPoints();
+        m_audioSource.PlayOneShot(RestartSound);
 
     }
 

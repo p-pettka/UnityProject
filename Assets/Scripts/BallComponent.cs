@@ -10,6 +10,8 @@ public class BallComponent : MonoBehaviour
     private Vector3 m_startPosition;
     private Quaternion m_startRotation;
     private AudioSource m_audioSource;
+    private Animator m_animator;
+    private ParticleSystem m_particles;
     public AudioClip PullSound;
     public AudioClip ShootSound;
     public AudioClip ImpactSound;
@@ -57,16 +59,23 @@ public class BallComponent : MonoBehaviour
         {
             m_hitTheGround = true;
             m_audioSource.PlayOneShot(ImpactSound);
+            m_animator.enabled = true;
+            m_animator.Play(0);
         }
     }
+
     private void OnMouseUp()
     {
         m_rigidbody.simulated = true;
+        m_particles.startSpeed = 5f;
+        m_particles.Play();
         if(!shooted)m_audioSource.PlayOneShot(ShootSound);
     }
     private void OnMouseDown()
     {
         if (!shooted)m_audioSource.PlayOneShot(PullSound);
+        m_particles.startSpeed = -5f;
+        m_particles.Play();
     }
 
     public bool IsSimulated()
@@ -82,6 +91,8 @@ public class BallComponent : MonoBehaviour
         m_lineRender = GetComponent<LineRenderer>();
         m_trailRenderer = GetComponent<TrailRenderer>();
         m_audioSource = GetComponent<AudioSource>();
+        m_animator = GetComponentInChildren<Animator>();
+        m_particles = GetComponentInChildren<ParticleSystem>();
         m_startPosition = transform.position;
         m_startRotation = transform.rotation;
     }

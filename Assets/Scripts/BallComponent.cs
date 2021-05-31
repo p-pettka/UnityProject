@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallComponent : MonoBehaviour
+public class BallComponent : InteractiveComponent, IRestartableObject
+
 {
     Rigidbody2D m_rigidbody;
     private SpringJoint2D m_connectedJoint;
@@ -24,12 +25,14 @@ public class BallComponent : MonoBehaviour
     private TrailRenderer m_trailRenderer;
     private bool m_hitTheGround = false;
     private bool shooted = false;
+
     private void SetLineRenderPoints()
     {
         m_lineRender.positionCount = 3;
         Vector2 armPosition = new Vector2(m_connectedBody.position.x + 0.8f, m_connectedBody.position.y);
         m_lineRender.SetPositions(new Vector3[] { m_connectedBody.position, transform.position, armPosition });
     }
+
     private void OnMouseDrag()
     {
         if (GameplayManager.Instance.Pause) return;
@@ -64,6 +67,41 @@ public class BallComponent : MonoBehaviour
         }
     }
 
+    private void DoPlay()
+    {
+        m_rigidbody.simulated = true;
+    }
+
+    private void DoPause()
+    {
+        m_rigidbody.simulated = false;
+    }
+
+    public void DoRestart()
+    {
+        transform.position = m_startPosition;
+        transform.rotation = m_startRotation;
+
+        m_rigidbody.velocity = Vector3.zero;
+        m_rigidbody.angularVelocity = 0.0f;
+        m_rigidbody.simulated = true;
+
+        m_connectedJoint.enabled = true;
+        m_lineRender.enabled = true;
+        m_trailRenderer.enabled = false;
+
+        shooted = false;
+        SetLineRenderPoints();
+        m_audioSource.PlayOneShot(RestartSound);
+
+    }
+
+    private void OnDestroy()
+    {
+        GameplayManager.OnGamePaused -= DoPause;
+        GameplayManager.OnGamePlaying -= DoPlay;
+    }
+
     private void OnMouseUp()
     {
         m_rigidbody.simulated = true;
@@ -71,6 +109,7 @@ public class BallComponent : MonoBehaviour
         m_particles.Play();
         if(!shooted)m_audioSource.PlayOneShot(ShootSound);
     }
+
     private void OnMouseDown()
     {
         if (!shooted)m_audioSource.PlayOneShot(PullSound);
@@ -95,6 +134,9 @@ public class BallComponent : MonoBehaviour
         m_particles = GetComponentInChildren<ParticleSystem>();
         m_startPosition = transform.position;
         m_startRotation = transform.rotation;
+        GameplayManager.OnGamePaused += DoPause;
+        GameplayManager.OnGamePlaying += DoPlay;
+
     }
 
     // Update is called once per frame
@@ -131,31 +173,10 @@ public class BallComponent : MonoBehaviour
         {
             m_rigidbody.bodyType = RigidbodyType2D.Dynamic;
         }
-        if (Input.GetKeyUp(KeyCode.R))
-            Restart();
 
     }
     private void FixedUpdate()
     {
         PhysicsSpeed = m_rigidbody.velocity.magnitude;
     }
-    private void Restart()
-    {
-        transform.position = m_startPosition;
-        transform.rotation = m_startRotation;
-
-        m_rigidbody.velocity = Vector3.zero;
-        m_rigidbody.angularVelocity = 0.0f;
-        m_rigidbody.simulated = true;
-
-        m_connectedJoint.enabled = true;
-        m_lineRender.enabled = true;
-        m_trailRenderer.enabled = false;
-
-        shooted = false;
-        SetLineRenderPoints();
-        m_audioSource.PlayOneShot(RestartSound);
-
-    }
-
 }

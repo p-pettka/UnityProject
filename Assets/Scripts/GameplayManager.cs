@@ -101,14 +101,13 @@ public class GameplayManager : Singleton<GameplayManager>
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Space))
-        {
             PlayPause();
-        }
 
         if (Input.GetKeyUp(KeyCode.R))
             Restart();
 
         if (Input.GetKeyUp(KeyCode.Escape))
-            Application.Quit();
+            GameState = EGameState.Paused;
+       
     }
 }

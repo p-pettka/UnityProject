@@ -35,7 +35,7 @@ public class BallComponent : InteractiveComponent, IRestartableObject
 
     private void OnMouseDrag()
     {
-        if (GameplayManager.Instance.Pause) return;
+        if (GameplayManager.Instance.GameState == EGameState.Paused) return;
         if (!shooted)
         {
             m_rigidbody.simulated = false;
@@ -166,7 +166,7 @@ public class BallComponent : InteractiveComponent, IRestartableObject
         if (Input.GetKeyDown(KeyCode.RightArrow))
                 transform.position += new Vector3(1, 0, 0);
 
-        if (GameplayManager.Instance.Pause)
+        if (GameplayManager.Instance.GameState == EGameState.Paused)
         {
             m_rigidbody.bodyType = RigidbodyType2D.Static;
         }else

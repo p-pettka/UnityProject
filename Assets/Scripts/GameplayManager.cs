@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum EGameState
+{
+    Playing,
+    Paused
+}
+
+
 public class GameplayManager : Singleton<GameplayManager>
 {
+
     private EGameState m_state;
     private HUDController m_HUD;
     private int m_points = 0;
-    public bool Pause;
     public delegate void GameStateCallBack();
     public static event GameStateCallBack OnGamePaused;
     public static event GameStateCallBack OnGamePlaying;
 
     List<IRestartableObject> m_restartableObjects = new List<IRestartableObject>();
-
-    public enum EGameState
-    {
-        Playing,
-        Paused
-    }
 
 
     private void GetAllRestartableObjects()
@@ -90,7 +91,6 @@ public class GameplayManager : Singleton<GameplayManager>
     // Start is called before the first frame update
     void Start()
     {
-        Pause = false;
         m_state = EGameState.Playing;
         GetAllRestartableObjects();
         m_HUD = FindObjectOfType<HUDController>();

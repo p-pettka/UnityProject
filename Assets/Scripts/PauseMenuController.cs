@@ -24,7 +24,7 @@ public class PauseMenuController : MonoBehaviour
 
     private void OnResume()
     {
-        GameplayManager.Instance.GameState = GameplayManager.EGameState.Playing;
+        GameplayManager.Instance.GameState = EGameState.Playing;
         SetPanelVisible(false);
     }
 

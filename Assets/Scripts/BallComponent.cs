@@ -2,21 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallComponent : InteractiveComponent, IRestartableObject
+public class BallComponent : InteractiveComponent
 
 {
-    Rigidbody2D m_rigidbody;
     private SpringJoint2D m_connectedJoint;
     private Rigidbody2D m_connectedBody;
-    private Vector3 m_startPosition;
-    private Quaternion m_startRotation;
-    private AudioSource m_audioSource;
     private Animator m_animator;
     private ParticleSystem m_particles;
-    public AudioClip PullSound;
-    public AudioClip ShootSound;
-    public AudioClip ImpactSound;
-    public AudioClip RestartSound;
     public float SlingStart = 0.5f;
     public float PhysicsSpeed;
     public float MaxSpringDistance = 2.5f;
@@ -36,6 +28,7 @@ public class BallComponent : InteractiveComponent, IRestartableObject
     private void OnMouseDrag()
     {
         if (GameplayManager.Instance.GameState == EGameState.Paused) return;
+
         if (!shooted)
         {
             m_rigidbody.simulated = false;
@@ -67,24 +60,9 @@ public class BallComponent : InteractiveComponent, IRestartableObject
         }
     }
 
-    private void DoPlay()
+    public override void DoRestart()
     {
-        m_rigidbody.simulated = true;
-    }
-
-    private void DoPause()
-    {
-        m_rigidbody.simulated = false;
-    }
-
-    public void DoRestart()
-    {
-        transform.position = m_startPosition;
-        transform.rotation = m_startRotation;
-
-        m_rigidbody.velocity = Vector3.zero;
-        m_rigidbody.angularVelocity = 0.0f;
-        m_rigidbody.simulated = true;
+        base.DoRestart();
 
         m_connectedJoint.enabled = true;
         m_lineRender.enabled = true;
@@ -96,6 +74,11 @@ public class BallComponent : InteractiveComponent, IRestartableObject
 
     }
 
+    public bool IsSimulated()
+    {
+        return m_rigidbody.simulated;
+    }
+
     private void OnDestroy()
     {
         GameplayManager.OnGamePaused -= DoPause;
@@ -105,22 +88,20 @@ public class BallComponent : InteractiveComponent, IRestartableObject
     private void OnMouseUp()
     {
         m_rigidbody.simulated = true;
-        m_particles.startSpeed = 5f;
+        var main = m_particles.main;
+        main.startSpeed = 5f;
         m_particles.Play();
-        if(!shooted)m_audioSource.PlayOneShot(ShootSound);
+        if (!shooted) m_audioSource.PlayOneShot(ShootSound);
     }
 
     private void OnMouseDown()
     {
-        if (!shooted)m_audioSource.PlayOneShot(PullSound);
-        m_particles.startSpeed = -5f;
+        if (!shooted) m_audioSource.PlayOneShot(PullSound);
+        var main = m_particles.main;
+        main.startSpeed = -5f;
         m_particles.Play();
     }
 
-    public bool IsSimulated()
-    {
-        return m_rigidbody.simulated;
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -155,26 +136,27 @@ public class BallComponent : InteractiveComponent, IRestartableObject
             m_trailRenderer.enabled = false;
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
-                transform.position += new Vector3(0, 1, 0);
+            transform.position += new Vector3(0, 1, 0);
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
-                transform.position -= new Vector3(0, 1, 0);
+            transform.position -= new Vector3(0, 1, 0);
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
-                transform.position -= new Vector3(1, 0, 0);
+            transform.position -= new Vector3(1, 0, 0);
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
-                transform.position += new Vector3(1, 0, 0);
+            transform.position += new Vector3(1, 0, 0);
 
         if (GameplayManager.Instance.GameState == EGameState.Paused)
         {
             m_rigidbody.bodyType = RigidbodyType2D.Static;
-        }else
+        }
+        else
         {
             m_rigidbody.bodyType = RigidbodyType2D.Dynamic;
         }
-
     }
+
     private void FixedUpdate()
     {
         PhysicsSpeed = m_rigidbody.velocity.magnitude;

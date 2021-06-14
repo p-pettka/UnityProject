@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
+using System.Threading.Tasks;
 
 public enum EGameState
 {
@@ -16,6 +18,7 @@ public class GameplayManager : Singleton<GameplayManager>
     private EGameState m_state;
     private HUDController m_HUD;
     private int m_points = 0;
+    private float m_frames;
     public delegate void GameStateCallBack();
     public static event GameStateCallBack OnGamePaused;
     public static event GameStateCallBack OnGamePlaying;
@@ -35,6 +38,53 @@ public class GameplayManager : Singleton<GameplayManager>
             foreach (var childInterface in childrenInterfaces)
                 m_restartableObjects.Add(childInterface);
         }
+    }
+
+    private void TestThrow()
+    {
+        throw new NullReferenceException("Test exception");
+    }
+
+    async Task TestAsync()
+    {
+        Debug.Log("Starting async method");
+        await Task.Delay(TimeSpan.FromSeconds(3));
+        Debug.Log("Async done after 3 seconds");
+    }
+
+    async void SecondTestAsync()
+    {
+        Debug.Log("Starting second async method");
+        await TestAsync();
+        Debug.Log("Second async done");
+    }
+
+    async void FPSCounter()
+    {
+        while (true)
+        {
+            float m_fps;
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            m_fps = (Time.frameCount / Time.time);
+            Debug.Log("FPS: " + m_fps);
+        }
+    }
+
+    IEnumerator FPS()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+            m_frames = (Time.frameCount / Time.time);
+            Debug.Log("FPS: " + (Mathf.Round(m_frames)));
+        }
+    }
+
+    IEnumerator TestCoroutine()
+    {
+        Debug.Log("Starting coroutine method");
+        yield return new WaitForSeconds(3);
+        Debug.Log("Coroutine done after 3 seconds");
     }
 
     public void Restart()
@@ -88,13 +138,33 @@ public class GameplayManager : Singleton<GameplayManager>
             }
         }
     }
+
     // Start is called before the first frame update
     void Start()
     {
+        //StartCoroutine(FPS());
+        //TestAsync();
+        SecondTestAsync();
+        //FPSCounter();
+
         m_state = EGameState.Playing;
         GetAllRestartableObjects();
         m_HUD = FindObjectOfType<HUDController>();
         Points = 0;
+        int[] Test = new int[2] { 0, 0 };
+        try
+        {
+            TestThrow();
+            Test[2] = 1;
+        }
+        catch (IndexOutOfRangeException e)
+        {
+            Debug.Log("Index exception: " + e.Message);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Exception: " + e.Message);
+        }
     }
 
     // Update is called once per frame

@@ -5810,6 +5810,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ef42fe67b114025a1b208dd9526b59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RestartSound: {fileID: 0}
+  PullSound: {fileID: 0}
+  ShootSound: {fileID: 0}
   ImpactSound: {fileID: 8300000, guid: c8eb4aba05db5426cbf10dd53517d6b7, type: 3}
 --- !u!61 &762805688
 BoxCollider2D:
@@ -10915,10 +10918,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8246ed21243994543ad467391c66e3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RestartSound: {fileID: 8300000, guid: 15581c1888016461f8a8286900b62d12, type: 3}
   PullSound: {fileID: 8300000, guid: 7ce49bd744f394e48afaefbc85245aae, type: 3}
   ShootSound: {fileID: 8300000, guid: c0ae51e5cbcef42f694d1c5abbe1ec7b, type: 3}
   ImpactSound: {fileID: 8300000, guid: c8eb4aba05db5426cbf10dd53517d6b7, type: 3}
-  RestartSound: {fileID: 8300000, guid: 15581c1888016461f8a8286900b62d12, type: 3}
   SlingStart: 0.5
   PhysicsSpeed: 0
   MaxSpringDistance: 2.5
@@ -13235,6 +13238,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ef42fe67b114025a1b208dd9526b59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RestartSound: {fileID: 0}
+  PullSound: {fileID: 0}
+  ShootSound: {fileID: 0}
   ImpactSound: {fileID: 8300000, guid: c8eb4aba05db5426cbf10dd53517d6b7, type: 3}
 --- !u!61 &1757586606
 BoxCollider2D:
@@ -18347,6 +18353,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ef42fe67b114025a1b208dd9526b59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RestartSound: {fileID: 0}
+  PullSound: {fileID: 0}
+  ShootSound: {fileID: 0}
   ImpactSound: {fileID: 8300000, guid: c8eb4aba05db5426cbf10dd53517d6b7, type: 3}
 --- !u!82 &1772573656
 AudioSource:

@@ -19,6 +19,7 @@ public class GameplayManager : Singleton<GameplayManager>
     private HUDController m_HUD;
     private int m_points = 0;
     private float m_frames;
+    public int m_LifetimeHits;
     public delegate void GameStateCallBack();
     public static event GameStateCallBack OnGamePaused;
     public static event GameStateCallBack OnGamePlaying;
@@ -102,6 +103,12 @@ public class GameplayManager : Singleton<GameplayManager>
             m_points = value;
             m_HUD.UpdatePoints(m_points);
         }
+    }
+
+    public int LifetimeHits
+    {
+        get { return m_LifetimeHits; }
+        set { m_LifetimeHits = value; }
     }
 
     public void PlayPause()

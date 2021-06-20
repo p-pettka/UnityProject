@@ -30,6 +30,7 @@ public class PauseMenuController : MonoBehaviour
 
     private void OnQuit()
     {
+        SaveManager.Instance.SaveSetting();
         Application.Quit();
     }
 

@@ -20,6 +20,7 @@ public class TargetComponent : InteractiveComponent
         {
             m_audioSource.PlayOneShot(ImpactSound);
             targetParticle.Play();
+            GameplayManager.Instance.LifetimeHits += 1;
             GameplayManager.Instance.Points += 1;
         }
     }

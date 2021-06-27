@@ -11,10 +11,16 @@ public class PauseMenuController : MonoBehaviour
     public Button YesButton;
     public Button NoButton;
     public GameObject Panel;
+    public GameObject MainMenu;
 
     public void SetPanelVisible(bool visible)
     {
         Panel.SetActive(visible);
+    }
+
+    public void SetMenulVisible(bool visible)
+    {
+        MainMenu.SetActive(visible);
     }
 
     private void OnPause()
@@ -31,7 +37,8 @@ public class PauseMenuController : MonoBehaviour
     private void OnQuit()
     {
         SaveManager.Instance.SaveSetting();
-        Application.Quit();
+        SetPanelVisible(false);
+        SetMenulVisible(true);
     }
 
     // Start is called before the first frame update

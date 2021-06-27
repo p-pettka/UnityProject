@@ -8,10 +8,7 @@ public class InteractiveComponent : MonoBehaviour, IRestartableObject
     protected Quaternion m_startRotation;
     protected Rigidbody2D m_rigidbody;
     protected AudioSource m_audioSource;
-    public AudioClip RestartSound;
-    public AudioClip PullSound;
-    public AudioClip ShootSound;
-    public AudioClip ImpactSound;
+
 
     public virtual void DoRestart()
     {

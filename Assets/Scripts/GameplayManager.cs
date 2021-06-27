@@ -23,6 +23,7 @@ public class GameplayManager : Singleton<GameplayManager>
     public delegate void GameStateCallBack();
     public static event GameStateCallBack OnGamePaused;
     public static event GameStateCallBack OnGamePlaying;
+    public GameSettingsDatabase GameDatabase;
 
     List<IRestartableObject> m_restartableObjects = new List<IRestartableObject>();
 
@@ -155,9 +156,13 @@ public class GameplayManager : Singleton<GameplayManager>
         //FPSCounter();
 
         m_state = EGameState.Playing;
-        GetAllRestartableObjects();
         m_HUD = FindObjectOfType<HUDController>();
         Points = 0;
+
+        GameObject.Instantiate(GameDatabase.TargetPrefab, new Vector3(0.35f, 4.25f, 0.0f), Quaternion.identity);
+        GameObject.Instantiate(GameDatabase.AnimPrefab, new Vector3(-2.0f, -1.7f, -0.7f), Quaternion.identity);
+        GetAllRestartableObjects();
+
         /*int[] Test = new int[2] { 0, 0 };
         try
         {

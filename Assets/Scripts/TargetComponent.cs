@@ -18,10 +18,11 @@ public class TargetComponent : InteractiveComponent
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ball"))
         {
-            m_audioSource.PlayOneShot(ImpactSound);
+            m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.ImpactSound);
             targetParticle.Play();
             GameplayManager.Instance.LifetimeHits += 1;
             GameplayManager.Instance.Points += 1;
+            //GameObject.Destroy(this.gameObject, 0.5f);
         }
     }
 

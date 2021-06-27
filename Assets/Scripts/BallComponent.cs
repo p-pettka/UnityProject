@@ -54,7 +54,7 @@ public class BallComponent : InteractiveComponent
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             m_hitTheGround = true;
-            m_audioSource.PlayOneShot(ImpactSound);
+            m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.ImpactSound);
             m_animator.enabled = true;
             m_animator.Play(0);
         }
@@ -70,7 +70,7 @@ public class BallComponent : InteractiveComponent
 
         shooted = false;
         SetLineRenderPoints();
-        m_audioSource.PlayOneShot(RestartSound);
+        m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.RestartSound);
 
     }
 
@@ -91,12 +91,12 @@ public class BallComponent : InteractiveComponent
         var main = m_particles.main;
         main.startSpeed = 5f;
         m_particles.Play();
-        if (!shooted) m_audioSource.PlayOneShot(ShootSound);
+        if (!shooted) m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.ShootSound);
     }
 
     private void OnMouseDown()
     {
-        if (!shooted) m_audioSource.PlayOneShot(PullSound);
+        if (!shooted) m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.PullSound);
         var main = m_particles.main;
         main.startSpeed = -5f;
         m_particles.Play();

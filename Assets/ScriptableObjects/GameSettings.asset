@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15e719c715dd242e587ce6bb6bcd95d1, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: 
+  TargetPrefab: {fileID: 9178906029092545449, guid: 18576b7d466324c58a1e4d36d9066eac,
+    type: 3}
+  AnimPrefab: {fileID: 7038929561963257112, guid: a16fabf976cbd49b2a390ba23bf70fe2,
+    type: 3}
+  RestartSound: {fileID: 8300000, guid: 15581c1888016461f8a8286900b62d12, type: 3}
+  PullSound: {fileID: 8300000, guid: 7ce49bd744f394e48afaefbc85245aae, type: 3}
+  ShootSound: {fileID: 8300000, guid: c0ae51e5cbcef42f694d1c5abbe1ec7b, type: 3}
+  ImpactSound: {fileID: 8300000, guid: c8eb4aba05db5426cbf10dd53517d6b7, type: 3}

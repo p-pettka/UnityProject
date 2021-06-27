@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
+
+[Serializable]
 
 public struct GameSaveData
 {
@@ -29,12 +32,10 @@ public class SaveManager : Singleton<SaveManager>
 
         if (UseBinary)
         {
-            string saveData = JsonUtility.ToJson(SaveData);
-            File.WriteAllText(m_pathJSON, saveData);
-            /*FileStream file = new FileStream(m_pathBin, FileMode.OpenOrCreate);
+            FileStream file = new FileStream(m_pathBin, FileMode.OpenOrCreate);
             BinaryFormatter binFormat = new BinaryFormatter();
             binFormat.Serialize(file, SaveData);
-            file.Close();*/
+            file.Close();
         }
         else
         {
@@ -45,35 +46,33 @@ public class SaveManager : Singleton<SaveManager>
 
     public void LoadSettings()
     {
-        Debug.Log("Loaded overall time value: " + SaveData.m_overallTime);
-        Debug.Log("Lifetime hits: " + GameplayManager.Instance.LifetimeHits);
-
         if (UseBinary && File.Exists(m_pathBin))
         {
-            string saveData = File.ReadAllText(m_pathJSON);
-            SaveData = JsonUtility.FromJson<GameSaveData>(saveData);
-            GameplayManager.Instance.LifetimeHits = SaveData.m_lifetimeHits;
-            /*FileStream file = new FileStream(m_pathBin, FileMode.Open);
+            FileStream file = new FileStream(m_pathBin, FileMode.Open);
             BinaryFormatter binFormat = new BinaryFormatter();
             SaveData = (GameSaveData)binFormat.Deserialize(file);
-            file.Close();*/
+            file.Close();
+            GameplayManager.Instance.m_LifetimeHits = SaveData.m_lifetimeHits;
         }
         else if (!UseBinary && File.Exists(m_pathJSON))
         {
             string saveData = File.ReadAllText(m_pathJSON);
             SaveData = JsonUtility.FromJson<GameSaveData>(saveData);
+            GameplayManager.Instance.m_LifetimeHits = SaveData.m_lifetimeHits;
         }
         else
         {
             SaveData.m_timeSinceLastSave = 0.0f;
         }
+        Debug.Log("Loaded overall time value: " + SaveData.m_overallTime);
+        Debug.Log("Lifetime hits: " + GameplayManager.Instance.LifetimeHits);
     }
 
     public void Start()
     {
+        UseBinary = true;
         m_pathBin = Path.Combine(Application.persistentDataPath, "save.bin");
         m_pathJSON = Path.Combine(Application.persistentDataPath, "save.json");
-        SaveData.m_timeSinceLastSave = 0.0f;
 
         LoadSettings();
     }

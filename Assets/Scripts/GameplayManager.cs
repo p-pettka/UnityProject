@@ -158,7 +158,7 @@ public class GameplayManager : Singleton<GameplayManager>
         GetAllRestartableObjects();
         m_HUD = FindObjectOfType<HUDController>();
         Points = 0;
-        int[] Test = new int[2] { 0, 0 };
+        /*int[] Test = new int[2] { 0, 0 };
         try
         {
             TestThrow();
@@ -171,7 +171,7 @@ public class GameplayManager : Singleton<GameplayManager>
         catch (Exception e)
         {
             Debug.Log("Exception: " + e.Message);
-        }
+        }*/
     }
 
     // Update is called once per frame

@@ -8,13 +8,18 @@ public class MainMenuController : MonoBehaviour
     public Button QuitButton;
 
     public GameObject MainPanel;
+    public GameObject MainMenuPanel;
+    public GameObject OptionsPanel;
 
     void Start()
     {
         PlayButton.onClick.AddListener(delegate { OnPlay(); });
+        OptionsButton.onClick.AddListener(delegate { ShowOptions(true); });
         QuitButton.onClick.AddListener(delegate { OnQuit(); });
 
         SetPanelVisible(true);
+        OptionsPanel.SetActive(false);
+        MainMenuPanel.SetActive(true);
     }
 
     public void SetPanelVisible(bool visible)
@@ -27,9 +32,14 @@ public class MainMenuController : MonoBehaviour
         SetPanelVisible(false);
     }
 
+    public void ShowOptions(bool bShow)
+    {
+        OptionsPanel.SetActive(bShow);
+        MainMenuPanel.SetActive(!bShow);
+    }
+
     private void OnQuit()
     {
         Application.Quit();
     }
-
 }

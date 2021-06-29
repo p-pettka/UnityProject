@@ -13,7 +13,10 @@ public class MainMenuController : MonoBehaviour
 
     void Start()
     {
-        PlayButton.onClick.AddListener(delegate { OnPlay(); });
+        PlayButton.onClick.AddListener(delegate {
+            OnPlay();
+            GameplayManager.Instance.Restart();
+            GameplayManager.Instance.GameState = EGameState.Playing;});
         OptionsButton.onClick.AddListener(delegate { ShowOptions(true); });
         QuitButton.onClick.AddListener(delegate { OnQuit(); });
 
@@ -30,6 +33,7 @@ public class MainMenuController : MonoBehaviour
     private void OnPlay()
     {
         SetPanelVisible(false);
+
     }
 
     public void ShowOptions(bool bShow)

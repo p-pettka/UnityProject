@@ -36,7 +36,7 @@ public class PauseMenuController : MonoBehaviour
 
     private void OnQuit()
     {
-        SaveManager.Instance.SaveSetting();
+        SaveManager.Instance.SaveSettings();
         SetPanelVisible(false);
         SetMenulVisible(true);
     }

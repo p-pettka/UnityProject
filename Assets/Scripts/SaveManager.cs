@@ -12,6 +12,7 @@ public struct GameSaveData
     public float m_timeSinceLastSave;
     public float m_overallTime;
     public int m_lifetimeHits;
+    public float m_masterVolume;
 }
 
 public class SaveManager : Singleton<SaveManager>
@@ -21,7 +22,7 @@ public class SaveManager : Singleton<SaveManager>
     private string m_pathBin;
     private string m_pathJSON;
 
-    public void SaveSetting()
+    public void SaveSettings()
     {
         SaveData.m_overallTime += SaveData.m_timeSinceLastSave;
         SaveData.m_lifetimeHits = GameplayManager.Instance.LifetimeHits;
@@ -53,19 +54,27 @@ public class SaveManager : Singleton<SaveManager>
             SaveData = (GameSaveData)binFormat.Deserialize(file);
             file.Close();
             GameplayManager.Instance.m_LifetimeHits = SaveData.m_lifetimeHits;
+            ApplySettings();
         }
         else if (!UseBinary && File.Exists(m_pathJSON))
         {
             string saveData = File.ReadAllText(m_pathJSON);
             SaveData = JsonUtility.FromJson<GameSaveData>(saveData);
             GameplayManager.Instance.m_LifetimeHits = SaveData.m_lifetimeHits;
+            ApplySettings();
         }
         else
         {
             SaveData.m_timeSinceLastSave = 0.0f;
+            SaveData.m_masterVolume = AudioListener.volume;
         }
         Debug.Log("Loaded overall time value: " + SaveData.m_overallTime);
         Debug.Log("Lifetime hits: " + GameplayManager.Instance.LifetimeHits);
+    }
+
+    private void ApplySettings()
+    {
+        AudioListener.volume = SaveData.m_masterVolume;
     }
 
     public void Start()
@@ -74,6 +83,7 @@ public class SaveManager : Singleton<SaveManager>
         m_pathBin = Path.Combine(Application.persistentDataPath, "save.bin");
         m_pathJSON = Path.Combine(Application.persistentDataPath, "save.json");
 
+        SaveData.m_masterVolume = AudioListener.volume;
         LoadSettings();
     }
 
@@ -84,6 +94,6 @@ public class SaveManager : Singleton<SaveManager>
 
     private void OnApplicationQuit()
     {
-        SaveSetting();
+        SaveSettings();
     }
 }

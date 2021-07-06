@@ -25,14 +25,11 @@
                 float2 uv : TEXCOORD0;
             };
 
-            v2g vert (appdata v)
+            struct v2g
             {
-                v2g o;
-                o.uv = v.uv; // Przekazujemy wartość z appdata do obiektu o
-                o.vertex = v.vertex; // j.w.
-                o.vertex.x += _HorizontalOffset;
-                return o;
-            }
+                float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
+            };
 
             struct g2f
             {
@@ -45,12 +42,12 @@
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
-            v2f vert (appdata v)
+            v2g vert (appdata v)
             {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.vertex.y += _HorizontalOffset;
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                v2g o;
+                o.uv = v.uv; // Przekazujemy wartość z appdata do obiektu o
+                o.vertex = v.vertex; // j.w.
+                o.vertex.x += _HorizontalOffset;
                 return o;
             }
 

@@ -42,7 +42,7 @@ public class GameplayManager : Singleton<GameplayManager>
         }
     }
 
-    private void TestThrow()
+    /*private void TestThrow()
     {
         throw new NullReferenceException("Test exception");
     }
@@ -59,7 +59,7 @@ public class GameplayManager : Singleton<GameplayManager>
         Debug.Log("Starting second async method");
         await TestAsync();
         Debug.Log("Second async done");
-    }
+    }*/
 
     async void FPSCounter()
     {
@@ -152,7 +152,7 @@ public class GameplayManager : Singleton<GameplayManager>
     {
         //StartCoroutine(FPS());
         //TestAsync();
-        SecondTestAsync();
+        //SecondTestAsync();
         //FPSCounter();
 
         m_state = EGameState.Playing;

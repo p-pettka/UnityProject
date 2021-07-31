@@ -7,6 +7,7 @@ public class HUDController : MonoBehaviour
 {
     public Button PauseButton;
     public Button RestartButton;
+    public Button LoadSpriteButton;
     public TMPro.TextMeshProUGUI PointsText;
     public GameObject Hud;
     public void SetHudVisible(bool visible)
@@ -35,6 +36,10 @@ public class HUDController : MonoBehaviour
         RestartButton.onClick.AddListener(delegate {
             GameplayManager.Instance.Restart();
         });
+        LoadSpriteButton.onClick.AddListener(delegate {
+            SpriteAssetLoader.Instance.SetSprites();
+        });
+
     }
 
     public void UpdatePoints(int points)

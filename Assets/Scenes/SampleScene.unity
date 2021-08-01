@@ -7589,7 +7589,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assetBundleName: sprites
-  assetBundleURL: https://uploads.kodilla.com/bootcamp/gamedev/v1/sprites
+  assetBundleURL: https://uploads.kodilla.com/bootcamp/gamedev/v2/sprites
+  abVersion: 1
 --- !u!4 &924429328
 Transform:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
 {
     public string assetBundleName;
     public string assetBundleURL;
+    public uint abVersion;
 
     private AssetBundle ab;
 
@@ -24,7 +25,7 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
 
     private IEnumerator LoadAssetsFromURL()
     {
-        UnityWebRequest uwr = UnityWebRequestAssetBundle.GetAssetBundle(assetBundleURL);
+        UnityWebRequest uwr = UnityWebRequestAssetBundle.GetAssetBundle(assetBundleURL, abVersion,0);
         uwr.SetRequestHeader("Content-Type", "application/json");
         uwr.SetRequestHeader("User-Agent", "DefaultBrowser");
         yield return uwr.SendWebRequest();
@@ -37,6 +38,7 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
             ab = DownloadHandlerAssetBundle.GetContent(uwr);
         }
         Debug.Log(ab == null ? "Failed to download Asset Bundle" : "Asset Bundle downloaded");
+        Debug.Log("Downloaded bytes : " + uwr.downloadedBytes);
     }
 
     public Sprite GetSprite(string assetName)

@@ -12,7 +12,7 @@ public class CreateAssetBundles
         if (!Directory.Exists(Application.streamingAssetsPath))
         {
             Directory.CreateDirectory(assetBundleDirectory);
-            BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.None, EditorUserBuildSettings.activeBuildTarget);
         }
+        BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.None, EditorUserBuildSettings.activeBuildTarget);
     }
 }

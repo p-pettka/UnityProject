@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class SpriteAssetLoader : Singleton<SpriteAssetLoader>
 {
-    public string spriteName = "ballsprite.png";
-    private Sprite sprite;
+    public string spriteName = "coinsprite.png";
 
     private SpriteRenderer spriteRender;
 

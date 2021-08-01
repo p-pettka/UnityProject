@@ -1,0 +1,135 @@
+ManifestFileVersion: 0
+CRC: 158936177
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 3f0b5488371975bf8eb9fb412ab1683a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 96f839b5d566ab131af7c5dce56a3296
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 58
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 62
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 81
+  Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 84
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 96
+  Script: {instanceID: 0}
+- Class: 104
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8246ed21243994543ad467391c66e3a8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d36284c188be640798a1c32196fc47c8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a3ae3f439140141a5a9bd531f8b21486, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 116b21142a8344d2d9d7e01738670bc7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 281377148b62c4c29b19dc9706921e4f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c1acf384893424ec195fa2c0d501cbff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 21fd9a66afa744a6b9da2bf880f98f57, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 15e719c715dd242e587ce6bb6bcd95d1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9c894c0a5e63c4e46b590abbdd19067c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4f4add6d196954b5a9d4fbc114cf87cf, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 52ef42fe67b114025a1b208dd9526b59, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0e16440f2e92d44c7bd877f42d29a1c1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 130ec4797188c46249583cd06bd332a7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 92fed6cb59879489c8e94f614609f209, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 120
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 157
+  Script: {instanceID: 0}
+- Class: 196
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+- Class: 231
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Scenes/SampleScene1.unity
+- Assets/Scenes/SampleScene.unity
+Dependencies:
+- /Users/p.pettka/UnityProject2/Assets/StreamingAssets/2d

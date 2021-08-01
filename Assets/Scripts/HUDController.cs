@@ -8,6 +8,7 @@ public class HUDController : MonoBehaviour
     public Button PauseButton;
     public Button RestartButton;
     public Button LoadSpriteButton;
+    public Button LoadSceneButton;
     public TMPro.TextMeshProUGUI PointsText;
     public GameObject Hud;
     public void SetHudVisible(bool visible)
@@ -38,6 +39,9 @@ public class HUDController : MonoBehaviour
         });
         LoadSpriteButton.onClick.AddListener(delegate {
             SpriteAssetLoader.Instance.SetSprites();
+        });
+        LoadSceneButton.onClick.AddListener(delegate {
+            AssetBundlesManager.Instance.LoadScene(1);
         });
 
     }

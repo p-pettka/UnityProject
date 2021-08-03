@@ -21,7 +21,6 @@ public class BeachBallLevitate : MonoBehaviour
     private int directionChangeCount;
     private bool aSyncActive;
 
-
     public float MaxSize = 3.0f;
     public float Amplitude = 1.0f;
     public float RotationSpeed = 50;

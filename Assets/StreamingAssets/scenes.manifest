@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 158936177
+CRC: 1211278890
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3f0b5488371975bf8eb9fb412ab1683a
+    Hash: 6c62ab2dc20cdfb05015b784d22c62fc
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 96f839b5d566ab131af7c5dce56a3296
+    Hash: 7d0816de8a651bd63f41b636966e8b21
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -101,6 +101,10 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 130ec4797188c46249583cd06bd332a7, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 92fed6cb59879489c8e94f614609f209, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f5e16044a53418f46b537a2fe4d8a0c2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d05eba85ffa86488c8e15d95b4a455f8, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 120
@@ -129,7 +133,7 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/Scenes/SampleScene1.unity
 - Assets/Scenes/SampleScene.unity
+- Assets/Scenes/SampleScene2.unity
 Dependencies:
 - /Users/p.pettka/UnityProject2/Assets/StreamingAssets/2d

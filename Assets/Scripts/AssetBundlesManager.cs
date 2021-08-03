@@ -41,7 +41,10 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
         }
         else
         {
-            ab = DownloadHandlerAssetBundle.GetContent(uwr);
+            if (ab == null)
+            {
+                ab = DownloadHandlerAssetBundle.GetContent(uwr);
+            }
         }
         Debug.Log(ab == null ? "Failed to download Asset Bundle" : "Asset Bundle downloaded");
         Debug.Log("Downloaded bytes : " + uwr.downloadedBytes);
@@ -60,7 +63,10 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
         }
         else
         {
-            ab2 = DownloadHandlerAssetBundle.GetContent(uwrLocal);
+            if (ab2 == null)
+            {
+                ab2 = DownloadHandlerAssetBundle.GetContent(uwrLocal);
+            }
         }
         Debug.Log(ab2 == null ? "Failed to download Asset Bundle from local URL" : "Asset Bundle downloaded from local URL");
         Debug.Log("Downloaded bytes : " + uwrLocal.downloadedBytes);

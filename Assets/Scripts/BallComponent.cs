@@ -12,11 +12,13 @@ public class BallComponent : InteractiveComponent
     public float SlingStart = 0.5f;
     public float PhysicsSpeed;
     public float MaxSpringDistance = 2.5f;
+    public Sprite[] ballSprites;
     private float SlingerArm;
     private LineRenderer m_lineRender;
     private TrailRenderer m_trailRenderer;
     private bool m_hitTheGround = false;
     private bool shooted = false;
+    private bool missedTarget;
 
     private void SetLineRenderPoints()
     {
@@ -57,6 +59,16 @@ public class BallComponent : InteractiveComponent
             m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.ImpactSound);
             m_animator.enabled = true;
             m_animator.Play(0);
+
+            if (missedTarget)
+            {
+                AnalyticsManager.Instance.SendEvent("MissedTarget");
+                missedTarget = false;
+            }
+        }
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Target"))
+        {
+            missedTarget = false;
         }
     }
 
@@ -113,10 +125,12 @@ public class BallComponent : InteractiveComponent
         m_audioSource = GetComponent<AudioSource>();
         m_animator = GetComponentInChildren<Animator>();
         m_particles = GetComponentInChildren<ParticleSystem>();
+        GetComponent<SpriteRenderer>().sprite = ballSprites[AnalyticsManager.Instance.GetIntParameter("SpriteIndex")];
         m_startPosition = transform.position;
         m_startRotation = transform.rotation;
         GameplayManager.OnGamePaused += DoPause;
         GameplayManager.OnGamePlaying += DoPlay;
+        missedTarget = true;
 
     }
 

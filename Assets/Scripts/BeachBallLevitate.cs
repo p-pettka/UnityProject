@@ -19,14 +19,14 @@ public class BeachBallLevitate : MonoBehaviour
     private bool isMoving;
     private int timer;
     private int directionChangeCount;
-    private bool aSyncActive;
+    //private bool aSyncActive;
 
     public float MaxSize = 3.0f;
     public float Amplitude = 1.0f;
     public float RotationSpeed = 50;
     public float OldTime;
 
-    /*IEnumerator BeachBallCoroutine()
+    IEnumerator BeachBallCoroutine()
     {
         while (true)
         {
@@ -61,9 +61,9 @@ public class BeachBallLevitate : MonoBehaviour
                 isMoving = true;
             }
         }
-    }*/
+    }
 
-    async void BeachBallAsync()
+    /*async void BeachBallAsync()
     {
         while (aSyncActive)
         {
@@ -102,12 +102,12 @@ public class BeachBallLevitate : MonoBehaviour
                 isMoving = true;
             }
         }
-    }
+    }*/
 
     // Start is called before the first frame update
     void Start()
     {
-        aSyncActive = true;
+        //aSyncActive = true;
         startTime = Time.time;
         m_startPosition = transform.position;
         m_loopPosition = m_startPosition;
@@ -117,8 +117,8 @@ public class BeachBallLevitate : MonoBehaviour
         m_curYPos = 0.0f;
         directionChangeCount = 0;
         elapsedTime = 0.0f;
-        BeachBallAsync();
-        //StartCoroutine(BeachBallCoroutine());
+        //BeachBallAsync();
+        StartCoroutine(BeachBallCoroutine());
     }
 
     // Update is called once per frame
@@ -131,8 +131,8 @@ public class BeachBallLevitate : MonoBehaviour
         //transform.localScale = new Vector3(Mathf.PingPong(Time.time, MaxSize),transform.localScale.y, transform.localScale.z);
     }
 
-    private void OnApplicationQuit()
+    /*private void OnApplicationQuit()
     {
         aSyncActive = false;
-    }
+    }*/
 }

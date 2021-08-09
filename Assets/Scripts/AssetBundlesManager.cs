@@ -21,12 +21,15 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
 
     private IEnumerator LoadAssets(string name, Action<AssetBundle> bundle)
     {
-        AssetBundleCreateRequest abcr;
-        string path = Path.Combine(Application.streamingAssetsPath, name);
-        abcr = AssetBundle.LoadFromFileAsync(path);
-        yield return abcr;
-        bundle.Invoke(abcr.assetBundle);
-        Debug.LogFormat(abcr.assetBundle == null ? "Failed to Load Asset Bundle : {0}" : "Asset Bundle {0} loaded", name);
+        if (ab == null)
+        {
+            AssetBundleCreateRequest abcr;
+            string path = Path.Combine(Application.streamingAssetsPath, name);
+            abcr = AssetBundle.LoadFromFileAsync(path);
+            yield return abcr;
+            bundle.Invoke(abcr.assetBundle);
+            Debug.LogFormat(abcr.assetBundle == null ? "Failed to Load Asset Bundle : {0}" : "Asset Bundle {0} loaded", name);
+        }
     }
 
     private IEnumerator LoadAssetsFromURL()
@@ -100,7 +103,7 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
     private IEnumerator Start()
     {
         yield return StartCoroutine(GetABVersion());
-        yield return StartCoroutine(LoadAssets(assetBundleName, result => ab = result));
+        if (ab == null) yield return StartCoroutine(LoadAssets(assetBundleName, result => ab = result));
         yield return StartCoroutine(LoadAssetsFromURL());
         yield return StartCoroutine(LoadAssetsFromLocalURL());
     }

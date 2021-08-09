@@ -5,6 +5,7 @@ using UnityEngine;
 public class TargetComponent : InteractiveComponent
 {
     private ParticleSystem targetParticle;
+    private bool gotHit;
 
     public override void DoRestart()
     {
@@ -23,6 +24,12 @@ public class TargetComponent : InteractiveComponent
             GameplayManager.Instance.LifetimeHits += 1;
             GameplayManager.Instance.Points += 1;
             //GameObject.Destroy(this.gameObject, 0.5f);
+        }
+
+        if (!gotHit)
+        {
+            AnalyticsManager.Instance.SendEvent("HitTarget");
+            gotHit = true;
         }
     }
 

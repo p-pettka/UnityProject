@@ -12,6 +12,8 @@ public class HUDController : MonoBehaviour
     public Button PurchaseButton;
     public TMPro.TextMeshProUGUI PointsText;
     public GameObject Hud;
+    public GameObject ActivePurchaseButton;
+
     public void SetHudVisible(bool visible)
     {
         Hud.SetActive(visible);
@@ -28,9 +30,12 @@ public class HUDController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        int adsRemoved = PlayerPrefs.GetInt("AdsRemoved");
         SetHudVisible(true);
         GameplayManager.OnGamePaused += OnPause;
         GameplayManager.OnGamePlaying += OnResume;
+
+        if (adsRemoved == 1) { ActivePurchaseButton.SetActive(false); }
 
         PauseButton.onClick.AddListener(delegate {
             GameplayManager.Instance.PlayPause();
@@ -46,8 +51,9 @@ public class HUDController : MonoBehaviour
         });
         PurchaseButton.onClick.AddListener(delegate {
             PurchasingManager.Instance.BuyRemoveAds();
+            adsRemoved = PlayerPrefs.GetInt("AdsRemoved");
+            if (adsRemoved == 1) { ActivePurchaseButton.SetActive(false); }
         });
-
     }
 
     public void UpdatePoints(int points)

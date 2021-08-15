@@ -12,8 +12,10 @@ public class AdsManager : Singleton<AdsManager>
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefs.SetInt("AdsRemoved", 0);
+        int adsRemoved = PlayerPrefs.GetInt("AdsRemoved");
         Advertisement.Initialize(ANDROID_AD_ID, testMode);
-        StartCoroutine(ShowBannerWhenInitialized());
+        if (adsRemoved != 1) { StartCoroutine(ShowBannerWhenInitialized()); }
     }
 
     private IEnumerator ShowBannerWhenInitialized()

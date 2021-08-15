@@ -9967,6 +9967,7 @@ MonoBehaviour:
   PurchaseButton: {fileID: 1599959601}
   PointsText: {fileID: 1060497303}
   Hud: {fileID: 1367681672}
+  ActivePurchaseButton: {fileID: 1599959600}
 --- !u!1 &1376671401
 GameObject:
   m_ObjectHideFlags: 0

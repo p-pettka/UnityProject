@@ -9,6 +9,7 @@ public class HUDController : MonoBehaviour
     public Button RestartButton;
     public Button LoadSpriteButton;
     public Button LoadSceneButton;
+    public Button PurchaseButton;
     public TMPro.TextMeshProUGUI PointsText;
     public GameObject Hud;
     public void SetHudVisible(bool visible)
@@ -42,6 +43,9 @@ public class HUDController : MonoBehaviour
         });
         LoadSceneButton.onClick.AddListener(delegate {
             AssetBundlesManager.Instance.LoadScene(1);
+        });
+        PurchaseButton.onClick.AddListener(delegate {
+            PurchasingManager.Instance.BuyRemoveAds();
         });
 
     }

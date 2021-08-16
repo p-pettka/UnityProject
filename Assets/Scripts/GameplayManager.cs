@@ -42,6 +42,18 @@ public class GameplayManager : Singleton<GameplayManager>
         }
     }
 
+    public void SpawnTestTargets(int numberOfTargets)
+    {
+        numberOfTargets = TestDrivenDevelopment.Instance.numberOfTargetsToSpawn;
+
+        for (int i = 0; i < numberOfTargets; i++)
+        {
+            float xPosition = UnityEngine.Random.Range(2.0f, 15.0f);
+            GameObject.Instantiate(GameDatabase.TargetPrefab, new Vector3(xPosition, 0.17f, 0.0f), Quaternion.identity);
+            TestDrivenDevelopment.Instance.numberOfSpawnedTargets++;
+        }
+    }
+
     /*private void TestThrow()
     {
         throw new NullReferenceException("Test exception");

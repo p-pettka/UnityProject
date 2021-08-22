@@ -52,6 +52,7 @@ public class GameplayManager : Singleton<GameplayManager>
             GameObject.Instantiate(GameDatabase.TargetPrefab, new Vector3(xPosition, 0.17f, 0.0f), Quaternion.identity);
             TestDrivenDevelopment.Instance.numberOfSpawnedTargets++;
         }
+        GetAllRestartableObjects();
     }
 
     /*private void TestThrow()
@@ -173,7 +174,7 @@ public class GameplayManager : Singleton<GameplayManager>
 
         GameObject.Instantiate(GameDatabase.TargetPrefab, new Vector3(0.35f, 4.25f, 0.0f), Quaternion.identity);
         GameObject.Instantiate(GameDatabase.AnimPrefab, new Vector3(-2.0f, -1.7f, -0.7f), Quaternion.identity);
-        GetAllRestartableObjects();
+        //GetAllRestartableObjects();
 
         /*int[] Test = new int[2] { 0, 0 };
         try

@@ -83,7 +83,6 @@ public class BallComponent : InteractiveComponent
         shooted = false;
         SetLineRenderPoints();
         m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.RestartSound);
-        transform.position = new Vector3((-0.6f), -0.9280946f, 0);
         m_rigidbody.velocity = Vector3.zero;
         m_rigidbody.freezeRotation = true;
     }
@@ -131,6 +130,7 @@ public class BallComponent : InteractiveComponent
         GetComponent<SpriteRenderer>().sprite = ballSprites[AnalyticsManager.Instance.GetIntParameter("SpriteIndex")];
         m_startPosition = transform.position;
         m_startRotation = transform.rotation;
+        m_rigidbody.velocity = Vector3.zero;
         GameplayManager.OnGamePaused += DoPause;
         GameplayManager.OnGamePlaying += DoPlay;
         transform.position = new Vector3((-0.6f), -0.9280946f, 0);

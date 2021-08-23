@@ -15,10 +15,9 @@ public class CameraController : MonoBehaviour
     private void LateUpdate()
     {
         if (!followTarget.IsSimulated()) return;
-        transform.position = Vector3.MoveTowards(transform.position, originalPosition + followTarget.transform.position, followTarget.PhysicsSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, originalPosition + followTarget.transform.position, followTarget.PhysicsSpeed + 0.5f);
         if (Input.GetKeyUp(KeyCode.R)) transform.position = originalPosition;
         //transform.position = followTarget.transform.position + originalPosition;
 
     }
-
 }

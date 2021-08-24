@@ -104,12 +104,20 @@ public class BallComponent : InteractiveComponent
         var main = m_particles.main;
         main.startSpeed = 5f;
         m_particles.Play();
-        if (!shooted) m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.ShootSound);
+
+        if (!shooted)
+        {
+            m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.ShootSound);
+        }
     }
 
     private void OnMouseDown()
     {
-        if (!shooted) m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.PullSound);
+        if (!shooted)
+        {
+            m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.PullSound);
+        }
+
         var main = m_particles.main;
         main.startSpeed = -5f;
         m_particles.Play();
@@ -142,6 +150,7 @@ public class BallComponent : InteractiveComponent
     void Update()
     {
         m_trailRenderer.enabled = !m_hitTheGround;
+
         if (transform.position.x > m_connectedBody.transform.position.x + SlingStart)
         {
             m_connectedJoint.enabled = false;
@@ -149,6 +158,7 @@ public class BallComponent : InteractiveComponent
             m_trailRenderer.enabled = true;
             shooted = true;
         }
+
         if (transform.position.x < m_connectedBody.transform.position.x + SlingStart)
         {
             m_trailRenderer.enabled = false;

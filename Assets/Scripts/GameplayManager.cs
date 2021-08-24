@@ -105,7 +105,10 @@ public class GameplayManager : Singleton<GameplayManager>
     public void Restart()
     {
         foreach (var restartableObject in m_restartableObjects)
+        {
             restartableObject.DoRestart();
+        }
+
         Points = 0;
     }
 

@@ -88,9 +88,4 @@ public class PurchasingManager : Singleton<PurchasingManager>, IStoreListener
     {
         InitializePurchasing();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }

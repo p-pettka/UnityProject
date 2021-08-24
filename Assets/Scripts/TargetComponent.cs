@@ -7,12 +7,19 @@ public class TargetComponent : InteractiveComponent
     private ParticleSystem targetParticle;
     private bool gotHit;
 
+    IEnumerator DestroyPlank(int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        this.gameObject.SetActive(false);
+    }
+
     public override void DoRestart()
     {
         base.DoRestart();
 
         m_rigidbody.velocity = Vector3.zero;
         m_rigidbody.angularVelocity = 0.0f;
+        gameObject.SetActive(true);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -24,6 +31,8 @@ public class TargetComponent : InteractiveComponent
             GameplayManager.Instance.LifetimeHits += 1;
             GameplayManager.Instance.Points += 1;
             //GameObject.Destroy(this.gameObject, 0.5f);
+            StartCoroutine(DestroyPlank(1));
+            //this.gameObject.SetActive(false);
         }
 
         if (!gotHit)
@@ -49,11 +58,5 @@ public class TargetComponent : InteractiveComponent
         m_startRotation = transform.rotation;
         GameplayManager.OnGamePaused += DoPause;
         GameplayManager.OnGamePlaying += DoPlay;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

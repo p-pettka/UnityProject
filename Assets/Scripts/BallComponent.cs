@@ -13,12 +13,12 @@ public class BallComponent : InteractiveComponent
     public float PhysicsSpeed;
     public float MaxSpringDistance = 2.5f;
     public Sprite[] ballSprites;
-    private float SlingerArm;
     private LineRenderer m_lineRender;
     private TrailRenderer m_trailRenderer;
     private bool m_hitTheGround = false;
     private bool shooted = false;
     private bool missedTarget;
+    private Vector2 m_currentVelocity;
 
     private void SetLineRenderPoints()
     {
@@ -85,6 +85,19 @@ public class BallComponent : InteractiveComponent
         m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.RestartSound);
         m_rigidbody.velocity = Vector3.zero;
         m_rigidbody.freezeRotation = true;
+    }
+
+    public override void DoPause()
+    {
+        m_currentVelocity = m_rigidbody.velocity;
+        base.DoPause();
+        Debug.Log(m_currentVelocity);
+    }
+
+    public override void DoPlay()
+    {
+        base.DoPlay();
+        m_rigidbody.AddForce(m_currentVelocity);
     }
 
     public bool IsSimulated()

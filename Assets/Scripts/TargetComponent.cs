@@ -5,10 +5,12 @@ using UnityEngine;
 public class TargetComponent : InteractiveComponent
 {
     private ParticleSystem targetParticle;
+    private ParticleSystem explosionParticle;
     private bool gotHit;
 
     IEnumerator DestroyPlank(int seconds)
     {
+        explosionParticle.Play();
         yield return new WaitForSeconds(seconds);
         this.gameObject.SetActive(false);
     }
@@ -54,6 +56,7 @@ public class TargetComponent : InteractiveComponent
         m_rigidbody = GetComponent<Rigidbody2D>();
         m_audioSource = GetComponent<AudioSource>();
         targetParticle = GetComponent<ParticleSystem>();
+        explosionParticle = GetComponentInChildren<ParticleSystem>();
         m_startPosition = transform.position;
         m_startRotation = transform.rotation;
         GameplayManager.OnGamePaused += DoPause;

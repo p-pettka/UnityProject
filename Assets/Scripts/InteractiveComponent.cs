@@ -18,12 +18,12 @@ public class InteractiveComponent : MonoBehaviour, IRestartableObject
         m_rigidbody.simulated = true;
     }
 
-    protected virtual void DoPlay()
+    public virtual void DoPlay()
     {
         m_rigidbody.simulated = true;
     }
 
-    protected virtual void DoPause()
+    public virtual void DoPause()
     {
         m_rigidbody.simulated = false;
     }

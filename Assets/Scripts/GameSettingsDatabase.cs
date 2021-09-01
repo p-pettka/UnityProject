@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "GameSettings", menuName = "ScriptableObjects/Create Game Settings", order = 1)]
+
 public class GameSettingsDatabase : ScriptableObject
 {
     [Header("Prefabs")]

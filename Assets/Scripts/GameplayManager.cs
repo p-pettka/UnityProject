@@ -11,7 +11,6 @@ public enum EGameState
     Paused
 }
 
-
 public class GameplayManager : Singleton<GameplayManager>
 {
 
@@ -31,14 +30,16 @@ public class GameplayManager : Singleton<GameplayManager>
     private void GetAllRestartableObjects()
     {
         m_restartableObjects.Clear();
-
         GameObject[] rootGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+
         foreach (var rootGameObject in rootGameObjects)
         {
             IRestartableObject[] childrenInterfaces = rootGameObject.GetComponentsInChildren<IRestartableObject>();
 
             foreach (var childInterface in childrenInterfaces)
+            {
                 m_restartableObjects.Add(childInterface);
+            }
         }
     }
 
@@ -54,25 +55,6 @@ public class GameplayManager : Singleton<GameplayManager>
         }
         GetAllRestartableObjects();
     }
-
-    /*private void TestThrow()
-    {
-        throw new NullReferenceException("Test exception");
-    }
-
-    async Task TestAsync()
-    {
-        Debug.Log("Starting async method");
-        await Task.Delay(TimeSpan.FromSeconds(3));
-        Debug.Log("Async done after 3 seconds");
-    }
-
-    async void SecondTestAsync()
-    {
-        Debug.Log("Starting second async method");
-        await TestAsync();
-        Debug.Log("Second async done");
-    }*/
 
     async void FPSCounter()
     {
@@ -166,33 +148,12 @@ public class GameplayManager : Singleton<GameplayManager>
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(FPS());
-        //TestAsync();
-        //SecondTestAsync();
-        //FPSCounter();
-
         m_state = EGameState.Playing;
         m_HUD = FindObjectOfType<HUDController>();
         Points = 0;
 
         GameObject.Instantiate(GameDatabase.TargetPrefab, new Vector3(0.35f, 4.25f, 0.0f), Quaternion.identity);
         GameObject.Instantiate(GameDatabase.AnimPrefab, new Vector3(-2.0f, -1.7f, -0.7f), Quaternion.identity);
-        //GetAllRestartableObjects();
-
-        /*int[] Test = new int[2] { 0, 0 };
-        try
-        {
-            TestThrow();
-            Test[2] = 1;
-        }
-        catch (IndexOutOfRangeException e)
-        {
-            Debug.Log("Index exception: " + e.Message);
-        }
-        catch (Exception e)
-        {
-            Debug.Log("Exception: " + e.Message);
-        }*/
     }
 
     // Update is called once per frame
@@ -205,7 +166,6 @@ public class GameplayManager : Singleton<GameplayManager>
             Restart();
 
         if (Input.GetKeyUp(KeyCode.Escape))
-            GameState = EGameState.Paused;
-       
+            GameState = EGameState.Paused;  
     }
 }

@@ -107,16 +107,4 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
         yield return StartCoroutine(LoadAssetsFromURL());
         yield return StartCoroutine(LoadAssetsFromLocalURL());
     }
-
-    /*private void Start()
-    {
-        if (string.IsNullOrEmpty(assetBundleURL))
-        {
-            StartCoroutine(LoadAssets());
-        }
-        else
-        {
-            StartCoroutine(LoadAssetsFromURL());
-        }
-    }*/
 }

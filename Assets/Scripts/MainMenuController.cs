@@ -17,8 +17,10 @@ public class MainMenuController : MonoBehaviour
             OnPlay();
             GameplayManager.Instance.Restart();
             GameplayManager.Instance.GameState = EGameState.Playing;});
-        OptionsButton.onClick.AddListener(delegate { ShowOptions(true); });
-        QuitButton.onClick.AddListener(delegate { OnQuit(); });
+        OptionsButton.onClick.AddListener(delegate {
+            ShowOptions(true); });
+        QuitButton.onClick.AddListener(delegate {
+            OnQuit(); });
 
         SetPanelVisible(true);
         OptionsPanel.SetActive(false);

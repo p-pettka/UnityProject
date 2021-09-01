@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour
 {
     private BallComponent followTarget;
     private Vector3 originalPosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +16,12 @@ public class CameraController : MonoBehaviour
     private void LateUpdate()
     {
         if (!followTarget.IsSimulated()) return;
-            transform.position = Vector3.MoveTowards(transform.position, originalPosition + followTarget.transform.position, followTarget.PhysicsSpeed + 0.5f);
-        if (Input.GetKeyUp(KeyCode.R)) transform.position = originalPosition;
-        //transform.position = followTarget.transform.position + originalPosition;
 
+        transform.position = Vector3.MoveTowards(transform.position, originalPosition + followTarget.transform.position, followTarget.PhysicsSpeed + 0.5f);
+
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            transform.position = originalPosition;
+        }
     }
 }

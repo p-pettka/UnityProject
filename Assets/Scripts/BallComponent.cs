@@ -51,6 +51,7 @@ public class BallComponent : InteractiveComponent
             SetLineRenderPoints();
         }
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -97,7 +98,8 @@ public class BallComponent : InteractiveComponent
     public override void DoPlay()
     {
         base.DoPlay();
-        m_rigidbody.AddForce(m_currentVelocity);
+        m_rigidbody.bodyType = RigidbodyType2D.Dynamic;
+        m_rigidbody.velocity = m_currentVelocity;
     }
 
     public bool IsSimulated()
@@ -176,6 +178,7 @@ public class BallComponent : InteractiveComponent
         {
             m_trailRenderer.enabled = false;
         }
+
         if (Input.GetKeyDown(KeyCode.UpArrow))
             transform.position += new Vector3(0, 1, 0);
 

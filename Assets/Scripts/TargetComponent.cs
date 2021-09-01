@@ -32,9 +32,7 @@ public class TargetComponent : InteractiveComponent
             targetParticle.Play();
             GameplayManager.Instance.LifetimeHits += 1;
             GameplayManager.Instance.Points += 1;
-            //GameObject.Destroy(this.gameObject, 0.5f);
             StartCoroutine(DestroyPlank(1));
-            //this.gameObject.SetActive(false);
         }
 
         if (!gotHit)

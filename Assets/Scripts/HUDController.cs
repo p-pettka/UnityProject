@@ -23,10 +23,12 @@ public class HUDController : MonoBehaviour
     {
         SetHudVisible(false);
     }
+
     private void OnResume()
     {
         SetHudVisible(true);
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +37,10 @@ public class HUDController : MonoBehaviour
         GameplayManager.OnGamePaused += OnPause;
         GameplayManager.OnGamePlaying += OnResume;
 
-        if (adsRemoved == 1) { ActivePurchaseButton.SetActive(false); }
+        if (adsRemoved == 1)
+        {
+            ActivePurchaseButton.SetActive(false);
+        }
 
         PauseButton.onClick.AddListener(delegate {
             GameplayManager.Instance.PlayPause();
@@ -52,7 +57,11 @@ public class HUDController : MonoBehaviour
         PurchaseButton.onClick.AddListener(delegate {
             PurchasingManager.Instance.BuyRemoveAds();
             adsRemoved = PlayerPrefs.GetInt("AdsRemoved");
-            if (adsRemoved == 1) { ActivePurchaseButton.SetActive(false); }
+
+            if (adsRemoved == 1)
+            {
+                ActivePurchaseButton.SetActive(false);
+            }
         });
     }
 

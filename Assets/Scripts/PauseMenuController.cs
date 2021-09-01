@@ -44,8 +44,10 @@ public class PauseMenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ResumeButton.onClick.AddListener(delegate { OnResume(); });
-        QuitButton.onClick.AddListener(delegate { OnQuit(); });
+        ResumeButton.onClick.AddListener(delegate {
+            OnResume(); });
+        QuitButton.onClick.AddListener(delegate {
+            OnQuit(); });
         RestartButton.onClick.AddListener(delegate {
             OnResume();
             GameplayManager.Instance.Restart();});
@@ -53,11 +55,5 @@ public class PauseMenuController : MonoBehaviour
         SetPanelVisible(false);
 
         GameplayManager.OnGamePaused += OnPause;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

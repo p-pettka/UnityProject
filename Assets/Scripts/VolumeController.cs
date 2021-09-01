@@ -9,8 +9,10 @@ public class VolumeController : MonoBehaviour
 
     private void Start()
     {
-        VolumeUp.onClick.AddListener(delegate { OnChangeVolume(true); });
-        VolumeDown.onClick.AddListener(delegate { OnChangeVolume(false); });
+        VolumeUp.onClick.AddListener(delegate {
+            OnChangeVolume(true); });
+        VolumeDown.onClick.AddListener(delegate {
+            OnChangeVolume(false); });
     }
 
     private void UpdateBar()
@@ -28,9 +30,13 @@ public class VolumeController : MonoBehaviour
         float newValue = AudioListener.volume;
 
         if (bUp)
+        {
             newValue += 0.1f;
+        }
         else
+        {
             newValue -= 0.1f;
+        }
 
         newValue = Mathf.Clamp01(newValue);
         AudioListener.volume = newValue;

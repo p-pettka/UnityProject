@@ -15,6 +15,9 @@ public class TestDrivenDevelopment : Singleton<TestDrivenDevelopment>
         {
             Debug.LogWarning("Test-driven Development - " +passNumberOfTestTargets+ " test prefabs: true");
         }
-        else { Debug.LogWarning("Test-driven Developemnt - "+ passNumberOfTestTargets+ " test prefabs: false"); }
+        else
+        {
+            Debug.LogWarning("Test-driven Developemnt - "+ passNumberOfTestTargets+ " test prefabs: false");
+        }
     }
 }

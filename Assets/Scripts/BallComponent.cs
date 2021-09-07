@@ -118,11 +118,11 @@ public class BallComponent : InteractiveComponent
         m_rigidbody.simulated = true;
         var main = m_particles.main;
         main.startSpeed = 5f;
-        m_particles.Play();
 
         if (!shooted)
         {
             m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.ShootSound);
+            m_particles.Play();
         }
     }
 
@@ -131,11 +131,11 @@ public class BallComponent : InteractiveComponent
         if (!shooted)
         {
             m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.PullSound);
+            m_particles.Play();
         }
 
         var main = m_particles.main;
         main.startSpeed = -5f;
-        m_particles.Play();
         m_rigidbody.freezeRotation = false;
     }
 
@@ -158,7 +158,6 @@ public class BallComponent : InteractiveComponent
         GameplayManager.OnGamePlaying += DoPlay;
         transform.position = new Vector3((-0.6f), -0.9280946f, 0);
         missedTarget = true;
-
     }
 
     // Update is called once per frame

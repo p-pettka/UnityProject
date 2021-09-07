@@ -7204,6 +7204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253fa32d42cf447728cc975007bdffda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  adsRemoved: 1
 --- !u!4 &758434966
 Transform:
   m_ObjectHideFlags: 0
@@ -12804,6 +12805,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SimpleAnimProp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7038929561963257112, guid: a16fabf976cbd49b2a390ba23bf70fe2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7038929561963257113, guid: a16fabf976cbd49b2a390ba23bf70fe2,
         type: 3}

@@ -20,3 +20,4 @@ MonoBehaviour:
   PullSound: {fileID: 8300000, guid: 7ce49bd744f394e48afaefbc85245aae, type: 3}
   ShootSound: {fileID: 8300000, guid: c0ae51e5cbcef42f694d1c5abbe1ec7b, type: 3}
   ImpactSound: {fileID: 8300000, guid: c8eb4aba05db5426cbf10dd53517d6b7, type: 3}
+  BackgroudMusic: {fileID: 8300000, guid: e0ce6f1f0c147460e9a5234a7f360121, type: 3}

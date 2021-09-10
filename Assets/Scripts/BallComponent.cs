@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BallComponent : InteractiveComponent
 
@@ -39,6 +37,7 @@ public class BallComponent : InteractiveComponent
             transform.position = new Vector3(worldPos.x, worldPos.y, 0);
             Vector2 newBallPos = new Vector3(worldPos.x, worldPos.y);
             float CurJointDistance = Vector3.Distance(newBallPos, m_connectedBody.transform.position);
+
             if (CurJointDistance > MaxSpringDistance)
             {
                 Vector2 direction = (newBallPos - m_connectedBody.position).normalized;
@@ -67,6 +66,7 @@ public class BallComponent : InteractiveComponent
                 missedTarget = false;
             }
         }
+
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Target"))
         {
             missedTarget = false;

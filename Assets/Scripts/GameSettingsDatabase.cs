@@ -13,4 +13,5 @@ public class GameSettingsDatabase : ScriptableObject
     public AudioClip PullSound;
     public AudioClip ShootSound;
     public AudioClip ImpactSound;
+    public AudioClip BackgroudMusic;
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Kodilla.Module8.Scripts;
 
 public class FadeRemoteControl : MonoBehaviour

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -16,7 +15,10 @@ public class AdsManager : Singleton<AdsManager>
         PlayerPrefs.SetInt("AdsRemoved", adsRemoved);
         adsRemoved = PlayerPrefs.GetInt("AdsRemoved");
         Advertisement.Initialize(ANDROID_AD_ID, testMode);
-        if (adsRemoved != 1) { StartCoroutine(ShowBannerWhenInitialized()); }
+        if (adsRemoved != 1)
+        {
+            StartCoroutine(ShowBannerWhenInitialized());
+        }
     }
 
     private IEnumerator ShowBannerWhenInitialized()

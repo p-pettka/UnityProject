@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.Networking;
@@ -103,7 +102,10 @@ public class AssetBundlesManager : Singleton<AssetBundlesManager>
     private IEnumerator Start()
     {
         yield return StartCoroutine(GetABVersion());
-        if (ab == null) yield return StartCoroutine(LoadAssets(assetBundleName, result => ab = result));
+        if (ab == null)
+        {
+            yield return StartCoroutine(LoadAssets(assetBundleName, result => ab = result));
+        }
         yield return StartCoroutine(LoadAssetsFromURL());
         yield return StartCoroutine(LoadAssetsFromLocalURL());
     }

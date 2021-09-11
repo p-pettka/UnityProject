@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "GameSettings", menuName = "ScriptableObjects/Create Game Settings", order = 1)]
 
@@ -14,4 +15,8 @@ public class GameSettingsDatabase : ScriptableObject
     public AudioClip ShootSound;
     public AudioClip ImpactSound;
     public AudioClip BackgroudMusic;
+
+    [Header("Sprites")]
+    public Sprite PlankSprite;
+    public Sprite DamagedPlankSprite;
 }

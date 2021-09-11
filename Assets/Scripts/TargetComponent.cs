@@ -5,21 +5,28 @@ public class TargetComponent : InteractiveComponent
 {
     private ParticleSystem targetParticle;
     private ParticleSystem explosionParticle;
+    private SpriteRenderer m_spriteRender;
     private bool gotHit;
+    private int numberOfHits;
+    private float targetHP;
 
     IEnumerator DestroyPlank(int seconds)
     {
         explosionParticle.Play();
-        yield return new WaitForSeconds(seconds);
-        this.gameObject.SetActive(false);
+        if (numberOfHits == 2 || targetHP < 0)
+        {
+            yield return new WaitForSeconds(seconds);
+            this.gameObject.SetActive(false);
+        }
     }
 
     public override void DoRestart()
     {
         base.DoRestart();
-
         m_rigidbody.velocity = Vector3.zero;
         m_rigidbody.angularVelocity = 0.0f;
+        m_spriteRender.sprite = GameplayManager.Instance.GameDatabase.PlankSprite;
+        targetHP = 10.0f;
         gameObject.SetActive(true);
     }
 
@@ -31,7 +38,16 @@ public class TargetComponent : InteractiveComponent
             targetParticle.Play();
             GameplayManager.Instance.LifetimeHits += 1;
             GameplayManager.Instance.Points += 1;
+            targetHP -= GameplayManager.Instance.ballVelocity;
+
+            if (targetHP < 5)
+            {
+                this.m_spriteRender.sprite = GameplayManager.Instance.GameDatabase.DamagedPlankSprite;
+            }
+
+            Debug.Log(targetHP);
             StartCoroutine(DestroyPlank(1));
+            this.numberOfHits++;
         }
 
         if (!gotHit)
@@ -54,9 +70,11 @@ public class TargetComponent : InteractiveComponent
         m_audioSource = GetComponent<AudioSource>();
         targetParticle = GetComponent<ParticleSystem>();
         explosionParticle = GetComponentInChildren<ParticleSystem>();
+        m_spriteRender = GetComponent<SpriteRenderer>();
         m_startPosition = transform.position;
         m_startRotation = transform.rotation;
         GameplayManager.OnGamePaused += DoPause;
         GameplayManager.OnGamePlaying += DoPlay;
+        targetHP = 15.0f;
     }
 }

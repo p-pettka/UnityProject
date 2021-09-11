@@ -69,6 +69,7 @@ public class BallComponent : InteractiveComponent
 
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Target"))
         {
+            //GameplayManager.Instance.ballVelocity = m_rigidbody.velocity.magnitude;
             missedTarget = false;
         }
     }
@@ -139,6 +140,11 @@ public class BallComponent : InteractiveComponent
         m_rigidbody.freezeRotation = false;
     }
 
+    public float get
+    {
+        get { return m_rigidbody.velocity.magnitude; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -203,5 +209,6 @@ public class BallComponent : InteractiveComponent
     private void FixedUpdate()
     {
         PhysicsSpeed = m_rigidbody.velocity.magnitude;
+        GameplayManager.Instance.ballVelocity = PhysicsSpeed;
     }
 }

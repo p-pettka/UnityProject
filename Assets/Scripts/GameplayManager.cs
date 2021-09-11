@@ -18,6 +18,7 @@ public class GameplayManager : Singleton<GameplayManager>
     private HUDController m_HUD;
     private int m_points = 0;
     private float m_frames;
+    public float ballVelocity;
     public int m_LifetimeHits;
     public delegate void GameStateCallBack();
     public static event GameStateCallBack OnGamePaused;

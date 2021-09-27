@@ -210,5 +210,10 @@ public class BallComponent : InteractiveComponent
     {
         PhysicsSpeed = m_rigidbody.velocity.magnitude;
         GameplayManager.Instance.ballVelocity = PhysicsSpeed;
+        if (PhysicsSpeed < 0.15f && shooted == true)
+        {
+            GameplayManager.Instance.BallRestart();
+            GameplayManager.Instance.Balls--;
+        }
     }
 }

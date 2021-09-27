@@ -94,6 +94,18 @@ public class GameplayManager : Singleton<GameplayManager>
         }
 
         Points = 0;
+        Balls = 3;
+    }
+
+    public void BallRestart()
+    {
+        foreach (var restartableObject in m_restartableObjects)
+        {
+            if (restartableObject.ToString() == "Ball (BallComponent)")
+            {
+                restartableObject.DoRestart();
+            }
+        }
     }
 
     public int Points

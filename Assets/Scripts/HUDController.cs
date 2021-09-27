@@ -9,6 +9,7 @@ public class HUDController : MonoBehaviour
     public Button LoadSceneButton;
     public Button PurchaseButton;
     public TMPro.TextMeshProUGUI PointsText;
+    public TMPro.TextMeshProUGUI BallsText;
     public GameObject Hud;
     public GameObject ActivePurchaseButton;
 
@@ -66,5 +67,10 @@ public class HUDController : MonoBehaviour
     public void UpdatePoints(int points)
     {
         PointsText.text = "Points: " + points;
+    }
+
+    public void UpdateBalls(int balls)
+    {
+        BallsText.text = "Balls: " + balls;
     }
 }

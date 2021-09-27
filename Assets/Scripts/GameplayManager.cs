@@ -17,6 +17,7 @@ public class GameplayManager : Singleton<GameplayManager>
     private EGameState m_state;
     private HUDController m_HUD;
     private int m_points = 0;
+    private int m_balls = 3;
     private float m_frames;
     public float ballVelocity;
     public int m_LifetimeHits;
@@ -25,10 +26,10 @@ public class GameplayManager : Singleton<GameplayManager>
     public static event GameStateCallBack OnGamePlaying;
     public GameSettingsDatabase GameDatabase;
 
-    List<IRestartableObject> m_restartableObjects = new List<IRestartableObject>();
+    public List<IRestartableObject> m_restartableObjects = new List<IRestartableObject>();
 
 
-    private void GetAllRestartableObjects()
+    public void GetAllRestartableObjects()
     {
         m_restartableObjects.Clear();
         GameObject[] rootGameObjects = SceneManager.GetActiveScene().GetRootGameObjects();
@@ -105,6 +106,16 @@ public class GameplayManager : Singleton<GameplayManager>
         }
     }
 
+    public int Balls
+    {
+        get { return m_balls; }
+        set
+        {
+            m_balls = value;
+            m_HUD.UpdateBalls(m_balls);
+        }
+    }
+
     public int LifetimeHits
     {
         get { return m_LifetimeHits; }
@@ -152,6 +163,9 @@ public class GameplayManager : Singleton<GameplayManager>
         m_state = EGameState.Playing;
         m_HUD = FindObjectOfType<HUDController>();
         Points = 0;
+        Balls = 3;
+
+        //SceneManager.LoadSceneAsync("Level1", LoadSceneMode.Additive);
 
         GameObject.Instantiate(GameDatabase.TargetPrefab, new Vector3(0.35f, 4.25f, 0.0f), Quaternion.identity);
         GameObject.Instantiate(GameDatabase.AnimPrefab, new Vector3(-2.0f, -1.7f, -0.7f), Quaternion.identity);
@@ -167,6 +181,6 @@ public class GameplayManager : Singleton<GameplayManager>
             Restart();
 
         if (Input.GetKeyUp(KeyCode.Escape))
-            GameState = EGameState.Paused;  
+            GameState = EGameState.Paused;
     }
 }

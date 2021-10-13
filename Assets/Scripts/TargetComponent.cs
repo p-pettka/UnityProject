@@ -16,6 +16,7 @@ public class TargetComponent : InteractiveComponent
         if (numberOfHits == 2 || targetHP < 0)
         {
             yield return new WaitForSeconds(seconds);
+            GameplayManager.Instance.Points += 1;
             this.gameObject.SetActive(false);
         }
     }
@@ -37,7 +38,6 @@ public class TargetComponent : InteractiveComponent
             m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.ImpactSound);
             targetParticle.Play();
             GameplayManager.Instance.LifetimeHits += 1;
-            GameplayManager.Instance.Points += 1;
             targetHP -= GameplayManager.Instance.ballVelocity;
 
             if (targetHP < 5)

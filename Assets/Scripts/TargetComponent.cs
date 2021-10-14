@@ -9,13 +9,19 @@ public class TargetComponent : InteractiveComponent
     private bool gotHit;
     private int numberOfHits;
     private float targetHP;
+    private bool pointAdded;
 
     IEnumerator DestroyPlank(int seconds)
     {
         explosionParticle.Play();
         if (numberOfHits == 2 || targetHP < 0)
         {
-            GameplayManager.Instance.Points += 1;
+            if (pointAdded == false)
+            {
+                GameplayManager.Instance.Points += 1;
+                pointAdded = true;
+            }
+
             ProgressBarController.Instance.UpdateProgressBar();
             yield return new WaitForSeconds(seconds);
             this.gameObject.SetActive(false);
@@ -77,5 +83,6 @@ public class TargetComponent : InteractiveComponent
         GameplayManager.OnGamePaused += DoPause;
         GameplayManager.OnGamePlaying += DoPlay;
         targetHP = 15.0f;
+        pointAdded = false;
     }
 }

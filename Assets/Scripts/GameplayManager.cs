@@ -20,7 +20,6 @@ public class GameplayManager : Singleton<GameplayManager>
     private int m_maxPoints;
     private int m_balls = 3;
     private float m_frames;
-    private bool addedExtraBall;
     public float ballVelocity;
     public int m_LifetimeHits;
     public delegate void GameStateCallBack();
@@ -46,7 +45,6 @@ public class GameplayManager : Singleton<GameplayManager>
             }
         }
         m_maxPoints = (m_restartableObjects.Count - 1);
-        addedExtraBall = false;
     }
 
     public void SpawnTestTargets(int numberOfTargets)

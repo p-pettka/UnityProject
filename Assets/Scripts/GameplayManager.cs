@@ -17,8 +17,10 @@ public class GameplayManager : Singleton<GameplayManager>
     private EGameState m_state;
     private HUDController m_HUD;
     private int m_points = 0;
+    private int m_maxPoints;
     private int m_balls = 3;
     private float m_frames;
+    private bool addedExtraBall;
     public float ballVelocity;
     public int m_LifetimeHits;
     public delegate void GameStateCallBack();
@@ -43,6 +45,8 @@ public class GameplayManager : Singleton<GameplayManager>
                 m_restartableObjects.Add(childInterface);
             }
         }
+        m_maxPoints = (m_restartableObjects.Count - 1);
+        addedExtraBall = false;
     }
 
     public void SpawnTestTargets(int numberOfTargets)
@@ -92,9 +96,9 @@ public class GameplayManager : Singleton<GameplayManager>
         {
             restartableObject.DoRestart();
         }
-
         Points = 0;
         Balls = 3;
+        ProgressBarController.Instance.UpdateProgressBar();
     }
 
     public void BallRestart()
@@ -115,6 +119,16 @@ public class GameplayManager : Singleton<GameplayManager>
         {
             m_points = value;
             m_HUD.UpdatePoints(m_points);
+        }
+    }
+
+    public int MaxPoints
+    {
+        get { return m_maxPoints; }
+        set
+        {
+            m_maxPoints = value;
+            m_HUD.UpdatePoints(m_maxPoints);
         }
     }
 

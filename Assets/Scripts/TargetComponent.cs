@@ -15,8 +15,9 @@ public class TargetComponent : InteractiveComponent
         explosionParticle.Play();
         if (numberOfHits == 2 || targetHP < 0)
         {
-            yield return new WaitForSeconds(seconds);
             GameplayManager.Instance.Points += 1;
+            ProgressBarController.Instance.UpdateProgressBar();
+            yield return new WaitForSeconds(seconds);
             this.gameObject.SetActive(false);
         }
     }

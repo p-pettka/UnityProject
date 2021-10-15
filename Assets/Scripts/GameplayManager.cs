@@ -191,8 +191,8 @@ public class GameplayManager : Singleton<GameplayManager>
 
         //SceneManager.LoadSceneAsync("Level1", LoadSceneMode.Additive);
 
-        GameObject.Instantiate(GameDatabase.TargetPrefab, new Vector3(0.35f, 4.25f, 0.0f), Quaternion.identity);
-        GameObject.Instantiate(GameDatabase.AnimPrefab, new Vector3(-2.0f, -1.7f, -0.7f), Quaternion.identity);
+        //GameObject.Instantiate(GameDatabase.TargetPrefab, new Vector3(0.35f, 4.25f, 0.0f), Quaternion.identity);
+        //GameObject.Instantiate(GameDatabase.AnimPrefab, new Vector3(-2.0f, -1.7f, -0.7f), Quaternion.identity);
     }
 
     // Update is called once per frame

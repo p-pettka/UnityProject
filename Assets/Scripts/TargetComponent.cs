@@ -8,13 +8,16 @@ public class TargetComponent : InteractiveComponent
     private SpriteRenderer m_spriteRender;
     private bool gotHit;
     private int numberOfHits;
-    private float targetHP;
     private bool pointAdded;
+    public float targetHP;
+    public int hitsToDestroy;
+    private float currentHP;
+    private float m_RGB;
 
     IEnumerator DestroyPlank(int seconds)
     {
         explosionParticle.Play();
-        if (numberOfHits == 2 || targetHP < 0)
+        if (numberOfHits == hitsToDestroy || currentHP < 0)
         {
             if (pointAdded == false)
             {
@@ -33,8 +36,8 @@ public class TargetComponent : InteractiveComponent
         base.DoRestart();
         m_rigidbody.velocity = Vector3.zero;
         m_rigidbody.angularVelocity = 0.0f;
-        m_spriteRender.sprite = GameplayManager.Instance.GameDatabase.PlankSprite;
-        targetHP = 10.0f;
+        this.m_spriteRender.color = new Color(1, 1, 1, 1);
+        currentHP = targetHP;
         gameObject.SetActive(true);
     }
 
@@ -45,14 +48,9 @@ public class TargetComponent : InteractiveComponent
             m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.ImpactSound);
             targetParticle.Play();
             GameplayManager.Instance.LifetimeHits += 1;
-            targetHP -= GameplayManager.Instance.ballVelocity;
-
-            if (targetHP < 5)
-            {
-                this.m_spriteRender.sprite = GameplayManager.Instance.GameDatabase.DamagedPlankSprite;
-            }
-
-            Debug.Log(targetHP);
+            currentHP -= GameplayManager.Instance.ballVelocity;
+            m_RGB = Mathf.Clamp(currentHP / targetHP, 0.4f, 1.0f);
+            this.m_spriteRender.color = new Color(m_RGB, m_RGB, m_RGB, 1);
             StartCoroutine(DestroyPlank(1));
             this.numberOfHits++;
         }
@@ -82,7 +80,7 @@ public class TargetComponent : InteractiveComponent
         m_startRotation = transform.rotation;
         GameplayManager.OnGamePaused += DoPause;
         GameplayManager.OnGamePlaying += DoPlay;
-        targetHP = 15.0f;
         pointAdded = false;
+        currentHP = targetHP;
     }
 }

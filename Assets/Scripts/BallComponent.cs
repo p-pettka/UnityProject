@@ -176,7 +176,6 @@ public class BallComponent : InteractiveComponent
             m_connectedJoint.enabled = false;
             m_lineRender.enabled = false;
             m_trailRenderer.enabled = true;
-            shooted = true;
         }
 
         if (transform.position.x < m_connectedBody.transform.position.x + SlingStart)
@@ -210,10 +209,17 @@ public class BallComponent : InteractiveComponent
     {
         PhysicsSpeed = m_rigidbody.velocity.magnitude;
         GameplayManager.Instance.ballVelocity = PhysicsSpeed;
-        if (PhysicsSpeed < 0.05f && shooted == true || PhysicsSpeed < 1.50f && shooted == true && m_hitTheGround == true)
+
+        if (PhysicsSpeed < 0.05f && shooted == true && GameplayManager.Instance.GameState == EGameState.Playing
+            || PhysicsSpeed < 1.50f && shooted == true && m_hitTheGround == true && GameplayManager.Instance.GameState == EGameState.Playing)
         {
             GameplayManager.Instance.BallRestart();
             GameplayManager.Instance.Balls--;
+        }
+
+        if (transform.position.x > m_connectedBody.transform.position.x + SlingStart + 2.0f)
+        {
+            shooted = true;
         }
     }
 }

@@ -18,9 +18,11 @@ public class GameplayManager : Singleton<GameplayManager>
     private HUDController m_HUD;
     private int m_points = 0;
     private int m_maxPoints;
+    private float m_passPoints;
     private int m_balls = 3;
     private float m_frames;
     private BallComponent m_ball;
+    public int currentLevel = 1;
     public float ballVelocity;
     public int m_LifetimeHits;
     public delegate void GameStateCallBack();
@@ -48,6 +50,7 @@ public class GameplayManager : Singleton<GameplayManager>
 
         m_restartableObjects.Add(m_ball);
         m_maxPoints = (m_restartableObjects.Count - 1);
+        m_passPoints = m_maxPoints * 0.7f;
     }
 
     public void SpawnTestTargets(int numberOfTargets)
@@ -68,7 +71,14 @@ public class GameplayManager : Singleton<GameplayManager>
         StartCoroutine(LoadScene(levelNumber));
     }
 
-    IEnumerator LoadScene(int sceneIndex)
+    private void LoadNextLevel()
+    {
+        SceneManager.UnloadSceneAsync(SceneManager.GetSceneByBuildIndex(currentLevel));
+        StartCoroutine(LoadScene(currentLevel + 1));
+        currentLevel += 1;
+    }
+
+    private IEnumerator LoadScene(int sceneIndex)
     {
         if (SceneManager.GetSceneByBuildIndex(sceneIndex).IsValid())
         {
@@ -80,20 +90,15 @@ public class GameplayManager : Singleton<GameplayManager>
         while (!asyncOperation.isDone)
         {
             Debug.Log("Loading progress: " + asyncOperation.progress + "%");
-            if(asyncOperation.progress >= 0.9f)
-            {
-                Debug.Log("Press the space bar to continue");
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    asyncOperation.allowSceneActivation = true;
-                }
-            }
             yield return null;
+            asyncOperation.allowSceneActivation = true;
         }
+
         if (asyncOperation.allowSceneActivation)
         {
             SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneIndex));
             GetAllRestartableObjects();
+            Debug.Log("Max points: " + MaxPoints);
             Debug.Log("Loaded scene number: " + sceneIndex);
         }
     }
@@ -229,19 +234,30 @@ public class GameplayManager : Singleton<GameplayManager>
         Points = 0;
         Balls = 3;
 
-        //SceneManager.LoadSceneAsync("Level1", LoadSceneMode.Additive);
-
         //GameObject.Instantiate(GameDatabase.TargetPrefab, new Vector3(0.35f, 4.25f, 0.0f), Quaternion.identity);
         //GameObject.Instantiate(GameDatabase.AnimPrefab, new Vector3(-2.0f, -1.7f, -0.7f), Quaternion.identity);
+    }
+
+    private void LateUpdate()
+    {
+        if (m_balls == 0)
+        {
+            if (m_points >= m_passPoints)
+            {
+                m_points = 0;
+                LoadNextLevel();
+                Restart();
+            }
+            else
+            {
+                Restart();
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("Active Scene : " + SceneManager.GetActiveScene().name);
-        /*if (Input.GetKeyUp(KeyCode.Space))
-            PlayPause();*/
-
         if (Input.GetKeyUp(KeyCode.R))
             Restart();
 

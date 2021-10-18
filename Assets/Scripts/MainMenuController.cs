@@ -17,7 +17,7 @@ public class MainMenuController : MonoBehaviour
         PlayButton.onClick.AddListener(delegate {
             OnPlay();
             //SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
-            GameplayManager.Instance.LoadLevel(2);
+            GameplayManager.Instance.LoadLevel(GameplayManager.Instance.currentLevel);
             GameplayManager.Instance.Restart();
             GameplayManager.Instance.GameState = EGameState.Playing;});
         OptionsButton.onClick.AddListener(delegate {

@@ -15,6 +15,7 @@ public class GameSettingsDatabase : ScriptableObject
     public AudioClip ShootSound;
     public AudioClip ImpactSound;
     public AudioClip BackgroudMusic;
+    public AudioClip ScoreSound;
 
     [Header("Sprites")]
     public Sprite PlankSprite;

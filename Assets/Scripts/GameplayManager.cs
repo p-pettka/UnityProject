@@ -20,6 +20,7 @@ public class GameplayManager : Singleton<GameplayManager>
     private int m_maxPoints;
     private int m_balls = 3;
     private float m_frames;
+    private BallComponent m_ball;
     public float ballVelocity;
     public int m_LifetimeHits;
     public delegate void GameStateCallBack();
@@ -44,6 +45,8 @@ public class GameplayManager : Singleton<GameplayManager>
                 m_restartableObjects.Add(childInterface);
             }
         }
+
+        m_restartableObjects.Add(m_ball);
         m_maxPoints = (m_restartableObjects.Count - 1);
     }
 
@@ -58,6 +61,39 @@ public class GameplayManager : Singleton<GameplayManager>
             TestDrivenDevelopment.Instance.numberOfSpawnedTargets++;
         }
         GetAllRestartableObjects();
+    }
+
+    public void LoadLevel(int levelNumber)
+    {
+        StartCoroutine(LoadScene(levelNumber));
+    }
+
+    IEnumerator LoadScene(int sceneIndex)
+    {
+        yield return null;
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
+        asyncOperation.allowSceneActivation = false;
+        Debug.Log("Pro: " + asyncOperation.progress);
+        while (!asyncOperation.isDone)
+        {
+            Debug.Log("Loading progress: " + asyncOperation.progress + "%");
+            if(asyncOperation.progress >= 0.9f)
+            {
+                Debug.Log("Press the space bar to continue");
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    asyncOperation.allowSceneActivation = true;
+                    GetAllRestartableObjects();
+                }
+            }
+            yield return null;
+        }
+        if (asyncOperation.allowSceneActivation)
+        {
+            SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneIndex));
+            GetAllRestartableObjects();
+            Debug.Log("Loaded scene number: " + sceneIndex);
+        }
     }
 
     async void FPSCounter()
@@ -97,6 +133,7 @@ public class GameplayManager : Singleton<GameplayManager>
         Points = 0;
         Balls = 3;
         ProgressBarController.Instance.UpdateProgressBar();
+        GetAllRestartableObjects();
     }
 
     public void BallRestart()
@@ -186,6 +223,7 @@ public class GameplayManager : Singleton<GameplayManager>
     {
         m_state = EGameState.Playing;
         m_HUD = FindObjectOfType<HUDController>();
+        m_ball = FindObjectOfType<BallComponent>();
         Points = 0;
         Balls = 3;
 
@@ -198,8 +236,9 @@ public class GameplayManager : Singleton<GameplayManager>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-            PlayPause();
+        //Debug.Log("Active Scene : " + SceneManager.GetActiveScene().name);
+        /*if (Input.GetKeyUp(KeyCode.Space))
+            PlayPause();*/
 
         if (Input.GetKeyUp(KeyCode.R))
             Restart();

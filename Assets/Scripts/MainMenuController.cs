@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
@@ -15,6 +16,8 @@ public class MainMenuController : MonoBehaviour
     {
         PlayButton.onClick.AddListener(delegate {
             OnPlay();
+            //SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
+            GameplayManager.Instance.LoadLevel(2);
             GameplayManager.Instance.Restart();
             GameplayManager.Instance.GameState = EGameState.Playing;});
         OptionsButton.onClick.AddListener(delegate {

@@ -70,7 +70,10 @@ public class GameplayManager : Singleton<GameplayManager>
 
     IEnumerator LoadScene(int sceneIndex)
     {
-        yield return null;
+        if (SceneManager.GetSceneByBuildIndex(sceneIndex).IsValid())
+        {
+            yield break;
+        }
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
         asyncOperation.allowSceneActivation = false;
         Debug.Log("Pro: " + asyncOperation.progress);
@@ -83,7 +86,6 @@ public class GameplayManager : Singleton<GameplayManager>
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     asyncOperation.allowSceneActivation = true;
-                    GetAllRestartableObjects();
                 }
             }
             yield return null;

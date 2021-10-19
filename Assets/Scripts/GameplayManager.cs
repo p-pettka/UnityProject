@@ -86,7 +86,7 @@ public class GameplayManager : Singleton<GameplayManager>
         }
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
         asyncOperation.allowSceneActivation = false;
-        Debug.Log("Pro: " + asyncOperation.progress);
+        Debug.Log("Progress: " + asyncOperation.progress);
         while (!asyncOperation.isDone)
         {
             Debug.Log("Loading progress: " + asyncOperation.progress + "%");
@@ -98,6 +98,7 @@ public class GameplayManager : Singleton<GameplayManager>
         {
             SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(sceneIndex));
             GetAllRestartableObjects();
+            GameState = EGameState.Playing;
             Debug.Log("Max points: " + MaxPoints);
             Debug.Log("Loaded scene number: " + sceneIndex);
         }
@@ -228,7 +229,7 @@ public class GameplayManager : Singleton<GameplayManager>
     // Start is called before the first frame update
     void Start()
     {
-        m_state = EGameState.Playing;
+        m_state = EGameState.Paused;
         m_HUD = FindObjectOfType<HUDController>();
         m_ball = FindObjectOfType<BallComponent>();
         Points = 0;

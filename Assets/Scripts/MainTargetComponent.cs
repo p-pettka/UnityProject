@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class MainTargetComponent : MonoBehaviour, IRestartableObject
+public class MainTargetComponent : InteractiveComponent
 {
     public int pointsToAdd;
-    private AudioSource m_audioSource;
 
     IEnumerator ScorePoints()
     {
@@ -16,20 +15,24 @@ public class MainTargetComponent : MonoBehaviour, IRestartableObject
         this.gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ball"))
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ball"))
         {
             StartCoroutine(ScorePoints());
         }
     }
-    public void DoRestart()
+    public override void DoRestart()
     {
+        base.DoRestart();
         gameObject.SetActive(true);
     }
 
     private void Start()
     {
         m_audioSource = GetComponent<AudioSource>();
+        m_rigidbody = GetComponent<Rigidbody2D>();
+        m_startPosition = transform.position;
+        m_startRotation = transform.rotation;
     }
 }

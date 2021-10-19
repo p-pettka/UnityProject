@@ -16,10 +16,10 @@ public class GameplayManager : Singleton<GameplayManager>
 
     private EGameState m_state;
     private HUDController m_HUD;
-    private int m_points = 0;
-    private int m_maxPoints;
-    private float m_passPoints;
-    private int m_balls = 3;
+    public int m_points = 0;
+    public int m_maxPoints;
+    public float m_passPoints;
+    public int m_balls = 3;
     private float m_frames;
     private BallComponent m_ball;
     public int currentLevel = 1;
@@ -71,7 +71,7 @@ public class GameplayManager : Singleton<GameplayManager>
         StartCoroutine(LoadScene(levelNumber));
     }
 
-    private void LoadNextLevel()
+    public void LoadNextLevel()
     {
         SceneManager.UnloadSceneAsync(SceneManager.GetSceneByBuildIndex(currentLevel));
         StartCoroutine(LoadScene(currentLevel + 1));
@@ -237,23 +237,6 @@ public class GameplayManager : Singleton<GameplayManager>
 
         //GameObject.Instantiate(GameDatabase.TargetPrefab, new Vector3(0.35f, 4.25f, 0.0f), Quaternion.identity);
         //GameObject.Instantiate(GameDatabase.AnimPrefab, new Vector3(-2.0f, -1.7f, -0.7f), Quaternion.identity);
-    }
-
-    private void LateUpdate()
-    {
-        if (m_balls == 0)
-        {
-            if (m_points >= m_passPoints)
-            {
-                m_points = 0;
-                LoadNextLevel();
-                Restart();
-            }
-            else
-            {
-                Restart();
-            }
-        }
     }
 
     // Update is called once per frame

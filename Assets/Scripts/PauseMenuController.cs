@@ -49,7 +49,6 @@ public class PauseMenuController : MonoBehaviour
         RestartButton.onClick.AddListener(delegate {
             OnResume();
             GameplayManager.Instance.Restart();});
-
         SetPanelVisible(false);
 
         GameplayManager.OnGamePaused += OnPause;

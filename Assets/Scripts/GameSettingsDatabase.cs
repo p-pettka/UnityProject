@@ -20,4 +20,6 @@ public class GameSettingsDatabase : ScriptableObject
     [Header("Sprites")]
     public Sprite PlankSprite;
     public Sprite DamagedPlankSprite;
+    public Sprite WinHeader;
+    public Sprite FailedHeader;
 }

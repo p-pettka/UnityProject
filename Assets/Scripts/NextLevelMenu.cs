@@ -42,7 +42,7 @@ public class NextLevelMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameplayManager.Instance.m_balls == 0)
+        if (GameplayManager.Instance.m_balls == 0 || GameplayManager.Instance.m_points >= GameplayManager.Instance.m_maxPoints)
         {
             SetPanelVisible(true);
 

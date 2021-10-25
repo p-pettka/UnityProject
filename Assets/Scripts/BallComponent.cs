@@ -17,6 +17,7 @@ public class BallComponent : InteractiveComponent
     private bool shooted = false;
     private bool missedTarget;
     private Vector2 m_currentVelocity;
+    private float timer;
 
     private void SetLineRenderPoints()
     {
@@ -71,6 +72,7 @@ public class BallComponent : InteractiveComponent
         {
             //GameplayManager.Instance.ballVelocity = m_rigidbody.velocity.magnitude;
             missedTarget = false;
+            timer = 0.0f;
         }
     }
 
@@ -124,6 +126,7 @@ public class BallComponent : InteractiveComponent
         {
             m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.ShootSound);
             m_particles.Play();
+            timer = 0.0f;
         }
     }
 
@@ -170,6 +173,8 @@ public class BallComponent : InteractiveComponent
     void Update()
     {
         m_trailRenderer.enabled = !m_hitTheGround;
+        timer += Time.deltaTime;
+        Debug.Log("Time since last hit: " + timer);
 
         if (transform.position.x > m_connectedBody.transform.position.x + SlingStart)
         {
@@ -210,8 +215,8 @@ public class BallComponent : InteractiveComponent
         PhysicsSpeed = m_rigidbody.velocity.magnitude;
         GameplayManager.Instance.ballVelocity = PhysicsSpeed;
 
-        if (PhysicsSpeed < 0.05f && shooted == true && GameplayManager.Instance.GameState == EGameState.Playing
-            || PhysicsSpeed < 1.50f && shooted == true && m_hitTheGround == true && GameplayManager.Instance.GameState == EGameState.Playing)
+        if (timer > 4.0f && shooted == true && GameplayManager.Instance.GameState == EGameState.Playing
+            || PhysicsSpeed < 0.05f && shooted == true && GameplayManager.Instance.GameState == EGameState.Playing)
         {
             GameplayManager.Instance.BallRestart();
             GameplayManager.Instance.Balls--;

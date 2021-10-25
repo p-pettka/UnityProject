@@ -13,7 +13,6 @@ public enum EGameState
 
 public class GameplayManager : Singleton<GameplayManager>
 {
-
     private EGameState m_state;
     private HUDController m_HUD;
     public int m_points = 0;
@@ -31,7 +30,6 @@ public class GameplayManager : Singleton<GameplayManager>
     public GameSettingsDatabase GameDatabase;
 
     public List<IRestartableObject> m_restartableObjects = new List<IRestartableObject>();
-
 
     public void GetAllRestartableObjects()
     {

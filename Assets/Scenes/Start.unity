@@ -740,8 +740,8 @@ Transform:
   m_Children:
   - {fileID: 1106983891}
   - {fileID: 677813164}
-  - {fileID: 813552816}
   - {fileID: 662107325}
+  - {fileID: 813552816}
   - {fileID: 914221148}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -2593,7 +2593,7 @@ GameObject:
   - component: {fileID: 662107325}
   - component: {fileID: 662107326}
   m_Layer: 0
-  m_Name: Background_04
+  m_Name: Background_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2611,7 +2611,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 243037310}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &662107326
 SpriteRenderer:
@@ -7907,7 +7907,7 @@ GameObject:
   - component: {fileID: 813552817}
   - component: {fileID: 813552818}
   m_Layer: 0
-  m_Name: Background_03
+  m_Name: Clouds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7926,7 +7926,7 @@ Transform:
   m_Children:
   - {fileID: 726011389}
   m_Father: {fileID: 243037310}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &813552817
 SpriteRenderer:
@@ -8565,7 +8565,7 @@ GameObject:
   - component: {fileID: 914221148}
   - component: {fileID: 914221149}
   m_Layer: 0
-  m_Name: Background_05
+  m_Name: Sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

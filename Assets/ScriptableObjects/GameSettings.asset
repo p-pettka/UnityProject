@@ -26,3 +26,17 @@ MonoBehaviour:
   DamagedPlankSprite: {fileID: 21300000, guid: 534c7c4c3779a47de9e9408669e5740f, type: 3}
   WinHeader: {fileID: 21300000, guid: 1b6d67077d0e3492c954203846d396c4, type: 3}
   FailedHeader: {fileID: 21300000, guid: 421a3f4a03cd04878839877d85813697, type: 3}
+  SkyDay: {fileID: 21300000, guid: 21f53d59beafc4f1a96d96dc5c7186df, type: 3}
+  SkyNight: {fileID: 21300000, guid: 936d5f73617464db0a18e05b13d42ca9, type: 3}
+  SummerGround: {fileID: 21300000, guid: 7af3418cbcc51443f90c668d672e9069, type: 3}
+  SummerBg1: {fileID: 21300000, guid: c24de8cf2103441d3931c9b8c41e4519, type: 3}
+  SummerBg2: {fileID: 21300000, guid: 2fced80a99a3645e0b8e379d40997aa7, type: 3}
+  SummerBg3: {fileID: 21300000, guid: 7b986112af1b846ec9b46e3e4ed6cee3, type: 3}
+  AutumnGround: {fileID: 21300000, guid: 697b960c9e8404edc92dbec1b33aa897, type: 3}
+  AutumnBg1: {fileID: 21300000, guid: d9d5b99a764614cd48083d53e5009add, type: 3}
+  AutumnBg2: {fileID: 21300000, guid: 9f75028292055443cac81bde2993ef05, type: 3}
+  AutumnBg3: {fileID: 21300000, guid: 17706d6e627c742c6851af752d774f03, type: 3}
+  WinterGround: {fileID: 21300000, guid: 8ddf7433376eb40e0869cc67fbb32fa0, type: 3}
+  WinterBg1: {fileID: 21300000, guid: 161752e9db67b4b90b4cd0313bdb3a29, type: 3}
+  WinterBg2: {fileID: 21300000, guid: a1b0b391f24e14a8db469f593df882de, type: 3}
+  WinterBg3: {fileID: 21300000, guid: 3841ddfdf5d8e44e29c7ebd0e4246f9d, type: 3}

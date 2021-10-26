@@ -22,4 +22,20 @@ public class GameSettingsDatabase : ScriptableObject
     public Sprite DamagedPlankSprite;
     public Sprite WinHeader;
     public Sprite FailedHeader;
+
+    [Header("Season sprites")]
+    public Sprite SkyDay;
+    public Sprite SkyNight;
+    public Sprite SummerGround;
+    public Sprite SummerBg1;
+    public Sprite SummerBg2;
+    public Sprite SummerBg3;
+    public Sprite AutumnGround;
+    public Sprite AutumnBg1;
+    public Sprite AutumnBg2;
+    public Sprite AutumnBg3;
+    public Sprite WinterGround;
+    public Sprite WinterBg1;
+    public Sprite WinterBg2;
+    public Sprite WinterBg3;
 }

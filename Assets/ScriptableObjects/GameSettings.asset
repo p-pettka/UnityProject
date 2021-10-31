@@ -40,3 +40,7 @@ MonoBehaviour:
   WinterBg1: {fileID: 21300000, guid: 161752e9db67b4b90b4cd0313bdb3a29, type: 3}
   WinterBg2: {fileID: 21300000, guid: a1b0b391f24e14a8db469f593df882de, type: 3}
   WinterBg3: {fileID: 21300000, guid: 3841ddfdf5d8e44e29c7ebd0e4246f9d, type: 3}
+  SpringGround: {fileID: 21300000, guid: 0ebdf1c97f4c5452ba741e8ee9408d61, type: 3}
+  SpringBg1: {fileID: 21300000, guid: 62058758efde842899db3bcb8bc23bf5, type: 3}
+  SpringBg2: {fileID: 21300000, guid: 3ae3184db78184f248fbc96e39eb1d48, type: 3}
+  SpringBg3: {fileID: 21300000, guid: bd8dea20196c94b0688c73c7c51b6c1d, type: 3}

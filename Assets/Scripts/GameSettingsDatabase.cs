@@ -38,4 +38,8 @@ public class GameSettingsDatabase : ScriptableObject
     public Sprite WinterBg1;
     public Sprite WinterBg2;
     public Sprite WinterBg3;
+    public Sprite SpringGround;
+    public Sprite SpringBg1;
+    public Sprite SpringBg2;
+    public Sprite SpringBg3;
 }

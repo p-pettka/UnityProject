@@ -136,6 +136,7 @@ public class BallComponent : InteractiveComponent
         {
             m_audioSource.PlayOneShot(GameplayManager.Instance.GameDatabase.PullSound);
             m_particles.Play();
+            Physics2D.IgnoreLayerCollision(8, 10, true);
         }
 
         var main = m_particles.main;
@@ -181,6 +182,7 @@ public class BallComponent : InteractiveComponent
             m_connectedJoint.enabled = false;
             m_lineRender.enabled = false;
             m_trailRenderer.enabled = true;
+            Physics2D.IgnoreLayerCollision(8, 10, false);
         }
 
         if (transform.position.x < m_connectedBody.transform.position.x + SlingStart)

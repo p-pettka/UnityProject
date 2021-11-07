@@ -50,7 +50,11 @@ public class BackgroundController : MonoBehaviour
                     break;
                 case ESeason.Spring:
                     {
-
+                        Background01.sprite = GameplayManager.Instance.GameDatabase.SpringBg1;
+                        Background02.sprite = GameplayManager.Instance.GameDatabase.SpringBg2;
+                        Background03.sprite = GameplayManager.Instance.GameDatabase.SpringBg3;
+                        Sky.sprite = GameplayManager.Instance.GameDatabase.SkyDay;
+                        Ground.sprite = GameplayManager.Instance.GameDatabase.SpringGround;
                     }
                     break;
                 case ESeason.Winter:
@@ -64,6 +68,11 @@ public class BackgroundController : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void Start()
+    {
+        Season = ESeason.Spring;
     }
 
     private void Update()

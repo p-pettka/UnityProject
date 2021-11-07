@@ -38,6 +38,7 @@ public class TargetComponent : InteractiveComponent
         m_rigidbody.angularVelocity = 0.0f;
         this.m_spriteRender.color = new Color(1, 1, 1, 1);
         currentHP = targetHP;
+        pointAdded = false;
         gameObject.SetActive(true);
     }
 

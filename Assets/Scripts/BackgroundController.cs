@@ -18,6 +18,7 @@ public class BackgroundController : MonoBehaviour
     public SpriteRenderer Clouds;
     public SpriteRenderer Sky;
     public SpriteRenderer Ground;
+    public ParticleSystem Snow;
 
     private ESeason m_season;
 
@@ -64,6 +65,7 @@ public class BackgroundController : MonoBehaviour
                         Background03.sprite = GameplayManager.Instance.GameDatabase.WinterBg3;
                         Sky.sprite = GameplayManager.Instance.GameDatabase.SkyNight;
                         Ground.sprite = GameplayManager.Instance.GameDatabase.WinterGround;
+                        Snow.Play();
                     }
                     break;
             }
@@ -73,6 +75,7 @@ public class BackgroundController : MonoBehaviour
     private void Start()
     {
         Season = ESeason.Spring;
+        Snow.Stop();
     }
 
     private void Update()

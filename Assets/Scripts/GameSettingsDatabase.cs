@@ -26,6 +26,9 @@ public class GameSettingsDatabase : ScriptableObject
     [Header("Season sprites")]
     public Sprite SkyDay;
     public Sprite SkyNight;
+    public Sprite SkyMorning;
+    public Sprite SkyAfternoon;
+    public Sprite SkyEvening;
     public Sprite SummerGround;
     public Sprite SummerBg1;
     public Sprite SummerBg2;

@@ -10,6 +10,13 @@ public enum ESeason
     Winter
 }
 
+public enum EDayTime
+{
+    Morning,
+    Afternoon,
+    Evening
+}
+
 public class BackgroundController : MonoBehaviour
 {
     public SpriteRenderer Background01;
@@ -19,6 +26,11 @@ public class BackgroundController : MonoBehaviour
     public SpriteRenderer Sky;
     public SpriteRenderer Ground;
     public ParticleSystem Snow;
+    private Color MorningColor;
+    private Color AfternoonColor;
+    private Color AfternoonWinterColor;
+    private Color EveningColor;
+    private int currentLevel;
 
     private ESeason m_season;
 
@@ -63,7 +75,7 @@ public class BackgroundController : MonoBehaviour
                         Background01.sprite = GameplayManager.Instance.GameDatabase.WinterBg1;
                         Background02.sprite = GameplayManager.Instance.GameDatabase.WinterBg2;
                         Background03.sprite = GameplayManager.Instance.GameDatabase.WinterBg3;
-                        Sky.sprite = GameplayManager.Instance.GameDatabase.SkyNight;
+                        Sky.sprite = GameplayManager.Instance.GameDatabase.SkyEvening;
                         Ground.sprite = GameplayManager.Instance.GameDatabase.WinterGround;
                         Snow.Play();
                     }
@@ -72,14 +84,70 @@ public class BackgroundController : MonoBehaviour
         }
     }
 
+    private EDayTime m_dayTime;
+
+    public EDayTime DayTme
+    {
+        get { return m_dayTime; }
+        set
+        {
+            m_dayTime = value;
+
+                switch (m_dayTime)
+            {
+                case EDayTime.Morning:
+                    {
+                        Sky.sprite = GameplayManager.Instance.GameDatabase.SkyMorning;
+                        changeColor(MorningColor);
+                    }
+                    break;
+
+                case EDayTime.Afternoon:
+                    {
+                        Sky.sprite = GameplayManager.Instance.GameDatabase.SkyAfternoon;
+                        if (Season == ESeason.Winter)
+                        {
+                            changeColor(AfternoonWinterColor);
+                        }
+                        else
+                        {
+                            changeColor(AfternoonColor);
+                        }
+                    }
+                    break;
+
+                case EDayTime.Evening:
+                    {
+                        Sky.sprite = GameplayManager.Instance.GameDatabase.SkyEvening;
+                        changeColor(EveningColor);
+                    }
+                    break;
+            }
+        }
+    }
+
+    private void changeColor(Color color)
+    {
+        Ground.color = color;
+        Background01.color = color;
+        Background02.color = color;
+        Background03.color = color;
+    }
+
     private void Start()
     {
         Season = ESeason.Spring;
         Snow.Stop();
+        MorningColor = new Color(1, 1, 1, 1);
+        AfternoonColor = new Color(1, 0.66f, 0, 1);
+        AfternoonWinterColor = new Color(1, 0.85f, 0.76f, 1);
+        EveningColor = new Color(0.35f, 0.4f, 0.58f, 1);
     }
 
     private void Update()
     {
+        currentLevel = GameplayManager.Instance.currentLevel;
+
         if(GameplayManager.Instance.currentLevel == 1 && Season != ESeason.Spring)
         {
             Season = ESeason.Spring;
@@ -95,6 +163,19 @@ public class BackgroundController : MonoBehaviour
         else if (GameplayManager.Instance.currentLevel == 10 && Season != ESeason.Winter)
         {
             Season = ESeason.Winter;
+        }
+
+        if (DayTme != EDayTime.Afternoon && (currentLevel == 2 || currentLevel == 5 || currentLevel == 8 || currentLevel == 11))
+        {
+            DayTme = EDayTime.Afternoon;
+        }
+        else if (DayTme != EDayTime.Evening && (currentLevel == 3 || currentLevel == 6 || currentLevel == 9 || currentLevel == 12))
+        {
+            DayTme = EDayTime.Evening;
+        }
+        else if (DayTme != EDayTime.Morning && (currentLevel == 1 || currentLevel == 4 || currentLevel == 7 || currentLevel == 10))
+        {
+            DayTme = EDayTime.Morning;
         }
     }
 }

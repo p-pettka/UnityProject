@@ -26,6 +26,7 @@ public class BackgroundController : MonoBehaviour
     public SpriteRenderer Sky;
     public SpriteRenderer Ground;
     public ParticleSystem Snow;
+    public ParticleSystem Bee;
     private Color MorningColor;
     private Color AfternoonColor;
     private Color AfternoonWinterColor;
@@ -77,7 +78,6 @@ public class BackgroundController : MonoBehaviour
                         Background03.sprite = GameplayManager.Instance.GameDatabase.WinterBg3;
                         Sky.sprite = GameplayManager.Instance.GameDatabase.SkyEvening;
                         Ground.sprite = GameplayManager.Instance.GameDatabase.WinterGround;
-                        Snow.Play();
                     }
                     break;
             }
@@ -138,6 +138,7 @@ public class BackgroundController : MonoBehaviour
     {
         Season = ESeason.Spring;
         Snow.Stop();
+        Bee.Play();
         MorningColor = new Color(1, 1, 1, 1);
         AfternoonColor = new Color(1, 0.66f, 0, 1);
         AfternoonWinterColor = new Color(1, 0.85f, 0.76f, 1);
@@ -148,6 +149,7 @@ public class BackgroundController : MonoBehaviour
     {
         currentLevel = GameplayManager.Instance.currentLevel;
 
+        //Season
         if(GameplayManager.Instance.currentLevel == 1 && Season != ESeason.Spring)
         {
             Season = ESeason.Spring;
@@ -159,12 +161,15 @@ public class BackgroundController : MonoBehaviour
         else if (GameplayManager.Instance.currentLevel == 7 && Season != ESeason.Autumn)
         {
             Season = ESeason.Autumn;
+            Bee.Stop();
         }
         else if (GameplayManager.Instance.currentLevel == 10 && Season != ESeason.Winter)
         {
             Season = ESeason.Winter;
+            Snow.Play();
         }
 
+        //DayTime
         if (DayTme != EDayTime.Afternoon && (currentLevel == 2 || currentLevel == 5 || currentLevel == 8 || currentLevel == 11))
         {
             DayTme = EDayTime.Afternoon;

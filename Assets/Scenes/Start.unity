@@ -769,6 +769,7 @@ MonoBehaviour:
   Sky: {fileID: 914221149}
   Ground: {fileID: 993014429}
   Snow: {fileID: 1553300741}
+  Bee: {fileID: 590996629}
 --- !u!1 &243507513
 GameObject:
   m_ObjectHideFlags: 0
@@ -13355,8 +13356,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914221147}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.64, z: 0}
-  m_LocalScale: {x: 1, y: 2.9999998, z: 1}
+  m_LocalPosition: {x: 0.1, y: 2.91, z: 0}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 243037310}
   m_RootOrder: 5
@@ -13400,12 +13401,12 @@ SpriteRenderer:
   m_SortingLayerID: -2014410211
   m_SortingLayer: -1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 21f53d59beafc4f1a96d96dc5c7186df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c68cad54681ab4f189af1bff91210099, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 90, y: 7.6381974}
+  m_Size: {x: 90, y: 7.9497423}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 1
   m_WasSpriteAssigned: 1
@@ -16630,7 +16631,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1

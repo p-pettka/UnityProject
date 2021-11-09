@@ -13380,7 +13380,6 @@ MonoBehaviour:
   LayerToHit:
     serializedVersion: 2
     m_Bits: 512
-  m_audioSource: {fileID: 0}
 --- !u!1 &914221147
 GameObject:
   m_ObjectHideFlags: 0

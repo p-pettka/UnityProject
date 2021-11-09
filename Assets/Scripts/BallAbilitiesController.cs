@@ -8,7 +8,7 @@ public class BallAbilitiesController : MonoBehaviour
     public float explosionForce;
 
     public LayerMask LayerToHit;
-    public AudioSource m_audioSource;
+    private AudioSource m_audioSource;
 
     private void ballExplode()
     {
@@ -18,6 +18,7 @@ public class BallAbilitiesController : MonoBehaviour
         {
             Vector2 direction = obj.transform.position - transform.position;
             obj.GetComponent<Rigidbody2D>().AddForce(direction * explosionForce);
+            obj.GetComponent<TargetComponent>().currentHP -= 20;
         }
         objects = null;
     }

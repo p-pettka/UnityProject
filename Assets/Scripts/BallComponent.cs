@@ -78,6 +78,7 @@ public class BallComponent : InteractiveComponent
 
     public override void DoRestart()
     {
+        m_rigidbody.bodyType = RigidbodyType2D.Dynamic;
         base.DoRestart();
 
         m_connectedJoint.enabled = true;
@@ -175,7 +176,6 @@ public class BallComponent : InteractiveComponent
     {
         m_trailRenderer.enabled = !m_hitTheGround;
         timer += Time.deltaTime;
-        Debug.Log("Time since last hit: " + timer);
 
         if (transform.position.x > m_connectedBody.transform.position.x + SlingStart)
         {

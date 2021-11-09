@@ -11,14 +11,15 @@ public class TargetComponent : InteractiveComponent
     private bool pointAdded;
     public float targetHP;
     public int hitsToDestroy;
-    private float currentHP;
+    public float currentHP;
     private float m_RGB;
+    private bool exploaded;
 
     IEnumerator DestroyPlank(int seconds)
     {
-        explosionParticle.Play();
-        if (numberOfHits == hitsToDestroy || currentHP < 0)
+        if (numberOfHits == hitsToDestroy || currentHP <= 0)
         {
+            explosionParticle.Play();
             if (pointAdded == false)
             {
                 GameplayManager.Instance.Points += 1;
@@ -40,6 +41,7 @@ public class TargetComponent : InteractiveComponent
         currentHP = targetHP;
         numberOfHits = 0;
         pointAdded = false;
+        exploaded = false;
         gameObject.SetActive(true);
     }
 
@@ -53,6 +55,7 @@ public class TargetComponent : InteractiveComponent
             currentHP -= GameplayManager.Instance.ballVelocity;
             m_RGB = Mathf.Clamp(currentHP / targetHP, 0.4f, 1.0f);
             this.m_spriteRender.color = new Color(m_RGB, m_RGB, m_RGB, 1);
+            explosionParticle.Play();
             StartCoroutine(DestroyPlank(1));
             this.numberOfHits++;
         }
@@ -83,6 +86,16 @@ public class TargetComponent : InteractiveComponent
         GameplayManager.OnGamePaused += DoPause;
         GameplayManager.OnGamePlaying += DoPlay;
         pointAdded = false;
+        exploaded = false;
         currentHP = targetHP;
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentHP <= 0 && exploaded == false)
+        {
+            StartCoroutine(DestroyPlank(1));
+            exploaded = true;
+        }
     }
 }

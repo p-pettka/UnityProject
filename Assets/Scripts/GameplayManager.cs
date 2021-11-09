@@ -245,6 +245,5 @@ public class GameplayManager : Singleton<GameplayManager>
 
         if (Input.GetKeyUp(KeyCode.Escape))
             GameState = EGameState.Paused;
-        Debug.Log("Max points: " + m_maxPoints);
     }
 }

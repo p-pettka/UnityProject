@@ -17,7 +17,7 @@ public class CloudMovement : MonoBehaviour
         length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         transform.position = new Vector3(backgroundPosition - movementEffect, transform.position.y, transform.position.z);
         backgroundPosition = transform.position.x;

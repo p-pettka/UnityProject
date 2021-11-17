@@ -26,6 +26,7 @@ public class MainTargetComponent : InteractiveComponent
     {
         base.DoRestart();
         gameObject.SetActive(true);
+        m_rigidbody.velocity = Vector3.zero;
     }
 
     private void Start()
